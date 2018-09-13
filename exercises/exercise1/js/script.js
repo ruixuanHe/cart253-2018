@@ -19,19 +19,29 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
-//add a new shape and its X & Y position
+//add a pig image and its X & Y position
 var pigImage;
 var pigImageX;
 var pigImageY;
+
+////add a wolf image and its X & Y position
+var wolfImage;
+var wolfImageX;
+var wolfmageY;
+
+
+
 
 // preload()
 //
 // Load the two images we're using before the program starts
 // load pigImage
+// load wolfImage
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
   pigImage = loadImage("assets/images/pig.ico");
+  wolfImage = loadImage("assets/images/wolf.png");
 }
 
 
@@ -54,6 +64,7 @@ function setup() {
   // Start the clown image at the centre left of the canvas
   pigImageY = height/2;
   pigImageX = 0;
+
 
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
@@ -89,5 +100,11 @@ function draw() {
   if(pigImageX <= (width-pigImage.width/2))
   pigImageX += 5;
   image(pigImage,pigImageX,pigImageY);
+
+  //a wolf under mouse
+  wolfImageX = mouseX;
+  wolfImageY = mouseY;
+  image(wolfImage,wolfImageX,wolfmageY);
+
 
 }
