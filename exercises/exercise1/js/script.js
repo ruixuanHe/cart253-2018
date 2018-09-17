@@ -19,29 +19,32 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
-//add a pig image and its X & Y position
+//add a pig image and its X & Y coordinator
 var pigImage;
 var pigImageX;
 var pigImageY;
 
-////add a wolf image and its X & Y position
+//add a wolf image and its X & Y coordinator
 var wolfImage;
 var wolfImageX;
 var wolfmageY;
 
+//add peppa pig image and its X & Y coordinator
+var pImage;
+var pImageX;
+var pImageY;
 
-
-
-// preload()
-//
+// preload() method
 // Load the two images we're using before the program starts
 // load pigImage
 // load wolfImage
+// load peppa pig image
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
   pigImage = loadImage("assets/images/pig.ico");
   wolfImage = loadImage("assets/images/wolf.png");
+  pImage = loadImage("assets/images/peppa.png");
 }
 
 
@@ -61,18 +64,23 @@ function setup() {
   feltTextureImageX = width/2;
   feltTextureImageY = 0 - feltTextureImage.height/2;
 
-  // Start the clown image at the centre left of the canvas
+  // Start the pig image at the centre left of the canvas
   pigImageY = height/2;
   pigImageX = 0;
 
+  //Start the wolf image at the centre of the canvas
+  wolfImageX = width/2;
+  wolfImageY = height/2;
 
+  //Start the peppa pig image at the centre of the canvas
+  pImageX = width/2;
+  pImageY = height/2;
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
 }
 
 
-// draw()
-//
+// draw() method
 // Moves the felt image linearly
 // Moves the clown face toward the current mouse location
 
@@ -96,15 +104,22 @@ function draw() {
   // Display the clown image
   image(clownImage,clownImageX,clownImageY);
 
-  //move the pigImage
+  //move the pigImage 5 units per loop and stop when pigImage reach the edge
   if(pigImageX <= (width-pigImage.width/2))
   pigImageX += 5;
   image(pigImage,pigImageX,pigImageY);
 
-  //a wolf under mouse
+  //display a wolf under mouse
   wolfImageX = mouseX;
   wolfImageY = mouseY;
-  image(wolfImage,wolfImageX,wolfmageY);
+  image(wolfImage,wolfImageX,wolfImageY,150,150);
 
+  // Calculate the distance in X and in Y
+  var xpDistance = mouseX - pImageX;
+  var ypDistance = mouseY - pImageY;
+  //add a moving peppa Image
+  pImageX = pImageX + xpDistance/150;
+  pImageY = pImageY + ypDistance/150;
+  image(pImage,pImageX,pImageY,150,150);
 
 }
