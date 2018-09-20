@@ -33,6 +33,9 @@ var enemySpeedIncrease = 0.5;
 // How many dodges the player has made
 var dodges = 0;
 
+// reddness of background color
+var reddness=250;
+
 // setup()
 //
 // Make the canvas, position the avatar and anemy
@@ -57,8 +60,8 @@ function setup() {
 // Handle moving the avatar and enemy and checking for dodges and
 // game over situations.
 function draw() {
-  // A pink background
-  background(255,220,220);
+  // A lige blue background
+  background(reddness, 239, 214);
 
   // Default the avatar's velocity to 0 in case no key is pressed this frame
   avatarVX = 0;
@@ -97,6 +100,8 @@ function draw() {
   // We do this by checking if the distance between the centre of the enemy
   // and the centre of the avatar is less that their combined radii
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
+    // reset reddness
+    reddness = 250;
     // Tell the player they lost
     console.log("YOU LOSE!");
     // Reset the enemy's position
@@ -127,6 +132,8 @@ function draw() {
 
   // Check if the enemy has moved all the way across the screen
   if (enemyX > width) {
+    //change the reddness, the bgcolor will become deeper and deeper
+    reddness = reddness -30;
     // This means the player dodged so update its dodge statistic
     dodges = dodges + 1;
     // Tell them how many dodges they have made
@@ -139,17 +146,31 @@ function draw() {
     enemySize = enemySize + enemySizeIncrease;
   }
 
+  // when user dodges morethan 5 balls, display comment
+  if(dodges >= 5 ){
+    textAlign(CENTER);
+    textSize(15);
+    fill(0,102,153);
+    text("You Are My Hero!!!",width/2,28);
+  }
+
+
   // Display the current number of successful in the console
   console.log(dodges);
+  // Display the current number of successful on the screen
+  textAlign(CENTER);
+  textSize(15);
+  fill(0,102,153);
+  text("You have dodged "+dodges+ " balls",width/2,13);
 
   // The player is black
   fill(0);
   // Draw the player as a circle
-  ellipse(avatarX,avatarY,avatarSize,avatarSize);
+  rect(avatarX,avatarY,avatarSize,avatarSize);
 
   // The enemy is red
   fill(255,0,0);
   // Draw the enemy as a circle
-  ellipse(enemyX,enemyY,enemySize,enemySize);
+  rect(enemyX,enemyY,enemySize,enemySize);
 
 }
