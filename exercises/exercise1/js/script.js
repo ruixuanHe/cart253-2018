@@ -1,5 +1,5 @@
 // Exercise 1 - Moving pictures
-// Pippin Barr
+// Pippin Barr & Ruixuan He 
 //
 // Starter code for exercise 1.
 // It moves two pictures around on the canvas.

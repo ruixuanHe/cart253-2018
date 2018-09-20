@@ -12,22 +12,20 @@ author, and this description to match your project!
 //
 // Description of setup
 
-var xiaogang;
-function preload(){
-  xiaogang = loadImage("assets/images/xiaogang.png");
-}
+var x;
+var y;
+var speed = 10;
+var vx;
+var ax = 0.1;
 function setup() {
-createCanvas(800,800);
-
+  createCanvas(500,500);
+  x = 0;
+  y = height/2;
+  vx = 0;
 }
-
-
-// draw()
-//
-// Description of draw()
 
 function draw() {
-imageMode(CENTER);
-image(xiaogang,mouseX,mouseY,250,250);
-
+  vx = constrain(vx+ax,-speed,speed);
+  x = x + vx;
+  ellipse(x,y,50,50);
 }
