@@ -105,6 +105,9 @@ function draw() {
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
     // reset reddness
     reddness = 250;
+    // reset avator's size and speed
+    avatarSize = 50;
+    avatarSpeed = 10;
     // Tell the player they lost
     console.log("YOU LOSE!");
     // Reset the enemy's position
@@ -122,7 +125,11 @@ function draw() {
 
   // Check if the avatar has gone off the screen (cheating!)
   if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
+
     // If they went off the screen they lose in the same way as above.
+    reddness = 250;
+    avatarSize = 50;
+    avatarSpeed = 10;
     console.log("YOU LOSE!");
     enemyX = 0;
     enemyY = random(0,height);
