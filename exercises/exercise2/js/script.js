@@ -1,7 +1,7 @@
 /*********************************************************
 
 Exercise 2 - The Artful Dodger
-Pippin Barr
+Pippin Barr & Ruixuan He
 
 Starter code for exercise 2.
 
@@ -24,6 +24,9 @@ var enemySize = 50;
 // How much bigger the enemy circle gets with each successful dodge
 var enemySizeIncrease = 5;
 
+// the variable of increasing size and enemySpeed
+var avatarSizeIncrease;
+var avatarSpeedIncrease;
 // The speed and velocity of our enemy circle
 var enemySpeed = 5;
 var enemyVX = 5;
@@ -144,6 +147,13 @@ function draw() {
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
+    // Increase the player's size and enemySpeed( between -10,10)
+    avatarSizeIncrease  = random(-10,10);
+    avatarSpeedIncrease = random(-10,10);
+
+    if((avatarSize += avatarSizeIncrease)>=0) avatarSize += avatarSizeIncrease;
+    if((avatarSpeed += avatarSpeedIncrease)>=0) avatarSpeed += avatarSpeedIncrease;
+
   }
 
   // when user dodges morethan 5 balls, display comment
