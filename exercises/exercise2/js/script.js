@@ -160,7 +160,7 @@ function draw() {
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
-    // Increase the player's size and enemySpeed( between -10,10)
+    // Challenge 5: Increase the player's size and enemySpeed( between -10,10)
     avatarSizeIncrease  = random(-10,10);
     avatarSpeedIncrease = random(-10,10);
 
@@ -170,7 +170,7 @@ function draw() {
 
   }
 
-  // challenge 4: when user dodges morethan 5 balls, display comment and peppa pig as a reward
+  // Challenge 4: when user dodges morethan 5 balls, display comment and peppa pig as a reward
   if(dodges >= 5 ){
     imageMode(CENTER);
     image(img,width/2,height/2,500,500);
@@ -192,7 +192,7 @@ function draw() {
 
   // Display the current number of successful in the console
   console.log(dodges);
-  // challenge 1: Display the current number of successful on the screen
+  // Challenge 1: Display the current number of successful on the screen
   textAlign(CENTER);
   textSize(15);
   fill(0,102,153);
@@ -200,7 +200,7 @@ function draw() {
 
   // The player is green
   fill(0, 255, 4);
-  // challenge 3: Draw the player as a square
+  // Challenge 3: Draw the player as a square
   rect(avatarX,avatarY,avatarSize,avatarSize);
 
   // The enemy is pueple
