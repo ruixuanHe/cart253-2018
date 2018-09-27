@@ -39,8 +39,10 @@ var dodges = 0;
 // reddness of background color
 var reddness=250;
 
+// add a variable of image
+var img;
+
 // setup()
-//
 // Make the canvas, position the avatar and anemy
 function setup() {
   // Create our playing area
@@ -56,6 +58,8 @@ function setup() {
 
   // No stroke so it looks cleaner
   noStroke();
+  //preload peppa pig image
+  img = loadImage("image/peppa.png");
 }
 
 // draw()
@@ -102,6 +106,8 @@ function draw() {
   // Check if the enemy and avatar overlap - if they do the player loses
   // We do this by checking if the distance between the centre of the enemy
   // and the centre of the avatar is less that their combined radii
+
+  // challenge 3 : when play doge , the background color will change
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
     // reset reddness
     reddness = 250;
@@ -145,7 +151,7 @@ function draw() {
     //change the reddness, the bgcolor will become deeper and deeper
     reddness = reddness -30;
     // This means the player dodged so update its dodge statistic
-    dodges = dodges + 1;
+    dodges = dodges + 10;
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
@@ -158,36 +164,48 @@ function draw() {
     avatarSizeIncrease  = random(-10,10);
     avatarSpeedIncrease = random(-10,10);
 
-    if((avatarSize += avatarSizeIncrease)>=0) avatarSize += avatarSizeIncrease;
-    if((avatarSpeed += avatarSpeedIncrease)>=0) avatarSpeed += avatarSpeedIncrease;
+    if((avatarSize + avatarSizeIncrease)>=0) avatarSize += avatarSizeIncrease;
+
+    if((avatarSpeed + avatarSpeedIncrease)>=0) avatarSpeed += avatarSpeedIncrease;
 
   }
 
-  // when user dodges morethan 5 balls, display comment
+  // challenge 4: when user dodges morethan 5 balls, display comment and peppa pig as a reward
   if(dodges >= 5 ){
+    imageMode(CENTER);
+    image(img,width/2,height/2,500,500);
+
     textAlign(CENTER);
     textSize(15);
+
     fill(0,102,153);
     text("You Are My Hero!!!",width/2,28);
+
+    if(dodges >= 10){
+      text("You are so Great!!!",width/2,43);
+    }
+    if(dodges >= 20){
+      text("Impossible!!!",width/2,58);
+    }
   }
 
 
   // Display the current number of successful in the console
   console.log(dodges);
-  // Display the current number of successful on the screen
+  // challenge 1: Display the current number of successful on the screen
   textAlign(CENTER);
   textSize(15);
   fill(0,102,153);
   text("You have dodged "+dodges+ " balls",width/2,13);
 
-  // The player is black
-  fill(0);
-  // Draw the player as a circle
+  // The player is green
+  fill(0, 255, 4);
+  // challenge 3: Draw the player as a square
   rect(avatarX,avatarY,avatarSize,avatarSize);
 
-  // The enemy is red
-  fill(255,0,0);
-  // Draw the enemy as a circle
+  // The enemy is pueple
+  fill(123, 0, 255);
+  // Draw the enemy as a square
   rect(enemyX,enemyY,enemySize,enemySize);
 
 }
