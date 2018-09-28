@@ -151,7 +151,7 @@ function draw() {
     //change the reddness, the bgcolor will become deeper and deeper
     reddness = reddness -30;
     // This means the player dodged so update its dodge statistic
-    dodges = dodges + 10;
+    dodges = dodges + 1;
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
     // Reset the enemy's position to the left at a random height
