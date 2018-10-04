@@ -116,12 +116,34 @@ function setup() {
   var displayRectHeight = 0.2 * height;
   strokeWeight(2.5);
   stroke(31, 143, 155);
-  imageMode(CORNER);
+  imageMode(CENTER);
   //great color lol, love it
   fill(49, 228, 247);
   rect(displayRectX,displayRectY,displayRectWidth,displayRectHeight);
-  image(targetImage,displayRectX,displayRectY,displayRectWidth,displayRectHeight);
+  if (displayRectWidth>=displayRectHeight) {
+    image(targetImage,displayRectX + 0.1*width,displayRectY + 0.1*height,displayRectHeight,displayRectHeight);
+  }
+  else {
+    image(targetImage,displayRectX+ 0.1*width,displayRectY+ 0.1*height,displayRectWidth,displayRectWidth);
+  }
 
+
+  //ex02 add caption to the target image
+  var displayCaptionX = 0.8 * width;
+  var displayCaptionY = 0.2 * height;
+  var displayCaptionWidth = 0.2 * width;
+  var displayCaptionHeight = 0.05 * height;
+  strokeWeight(2.5);
+  stroke(31, 143, 155);
+  fill(49, 228, 247);
+  rect(displayCaptionX,displayCaptionY,displayCaptionWidth,displayCaptionHeight);
+  var textString = "Catch me baby~";
+  textAlign(CENTER,CENTER);
+  textStyle(ITALIC);
+  textFont("Bad Script Regular");
+  fill(232, 250, 255);
+  noStroke();
+  text(textString,displayCaptionX,displayCaptionY,displayCaptionWidth,displayCaptionHeight);
 
 }
 
