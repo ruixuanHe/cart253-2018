@@ -9,7 +9,12 @@ the visual noise of other animals.
 Animal images from:
 https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal-icon-set/
 ******************************************************************************/
-
+//ex04 variable
+var targetImageWidth;
+var targetImageHeight;
+var redness = 100;
+var textX;
+var textY;
 // Position and image of the sausage dog we're searching for
 var targetX;
 var targetY;
@@ -141,6 +146,7 @@ function setup() {
   textAlign(CENTER,CENTER);
   textStyle(ITALIC);
   textFont("Bad Script Regular");
+
   fill(232, 250, 255);
   noStroke();
   text(textString,displayCaptionX,displayCaptionY,displayCaptionWidth,displayCaptionHeight);
@@ -148,8 +154,12 @@ function setup() {
   //ex03 make sure the targetImage never underneath
   while (targetX >=0.8*width && targetY <= 0.25*height) {
   image(targetImage,targetX,targetY);
-  }
-  
+}
+//ex04 setup
+targetImageWidth = targetImage.width;
+targetImageHeight = targetImage.height;
+textX = width/2;
+textY = height/2;
 }
 
 function draw() {
@@ -159,15 +169,49 @@ function draw() {
     textSize(128);
     textAlign(CENTER,CENTER);
     noStroke();
-    fill(random(255));
+    fill(redness,100, 100);
     // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
+    text("YOU WINNED!",textX,textY);
 
     noFill();
-    stroke(random(255));
+    stroke(redness,219, 214);
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+    redness += 0.55;
+    //ex04 update the winning reward
+
+    textY += 0.5;
+
+    targetImageWidth = 1.01* targetImageWidth;
+    targetImageHeight = 1.01* targetImageHeight;
+    var targetImageVX = random(-5,5);
+    var targetImageVY = random(-5,5);
+    targetX += targetImageVX;
+    targetY += targetImageVY;
+
+    /*warp screen
+    if( targetX+targetImageWidth/2 <= 0 ){
+      targetX += width;
+    }
+    else if(targetX-targetImageWidth/2 >= width){
+      targetX -= width;
+    }
+    if( targetY+targetImageWidth/2 <= 0 ){
+      targetY += height;
+    }
+    else if(targetY-targetImageWidth/2 >= height){
+      targetY -= height;
+    }*/
+
+
+    image(targetImage,targetX,targetY,targetImageWidth,targetImageHeight);
+    // Tell them they won!
+    text("YOU WINNED!",textX,textY);
+
   }
+
+
+
 }
 
 // mousePressed()
