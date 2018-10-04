@@ -32,9 +32,10 @@ var decoyImage8;
 var decoyImage9;
 var decoyImage10;
 
+//ex05 change the game difficulty
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
-var numDecoys = 100;
+var numDecoys = 50;
 
 // Keep track of whether they've won
 var gameOver = false;
@@ -112,7 +113,7 @@ function setup() {
   targetX = random(0,width);
   targetY = random(0,height);
   // And draw it (this means it will always be on top)
-  image(targetImage,targetX,targetY);
+  image(targetImage,targetX,targetY,0.25*width,0.25*height);
 
   //ex01 display the target image at top right corner
   var displayRectX = 0.8*width;
@@ -153,11 +154,11 @@ function setup() {
 
   //ex03 make sure the targetImage never underneath
   while (targetX >=0.8*width && targetY <= 0.25*height) {
-  image(targetImage,targetX,targetY);
+  image(targetImage,targetX,targetY,0.25*width,0.25*height);
 }
 //ex04 setup
-targetImageWidth = targetImage.width;
-targetImageHeight = targetImage.height;
+targetImageWidth = 0.25*width;
+targetImageHeight = 0.25*height;
 textX = width/2;
 textY = height/2;
 }
