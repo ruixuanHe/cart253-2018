@@ -108,6 +108,21 @@ function setup() {
   targetY = random(0,height);
   // And draw it (this means it will always be on top)
   image(targetImage,targetX,targetY);
+
+  //ex01 display the target image at top right corner
+  var displayRectX = 0.8*width;
+  var displayRectY = 0;
+  var displayRectWidth = 0.2 * width;
+  var displayRectHeight = 0.2 * height;
+  strokeWeight(2.5);
+  stroke(31, 143, 155);
+  imageMode(CORNER);
+  //great color lol, love it
+  fill(49, 228, 247);
+  rect(displayRectX,displayRectY,displayRectWidth,displayRectHeight);
+  image(targetImage,displayRectX,displayRectY,displayRectWidth,displayRectHeight);
+
+
 }
 
 function draw() {
