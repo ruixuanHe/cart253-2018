@@ -145,6 +145,11 @@ function setup() {
   noStroke();
   text(textString,displayCaptionX,displayCaptionY,displayCaptionWidth,displayCaptionHeight);
 
+  //ex03 make sure the targetImage never underneath
+  while (targetX >=0.8*width && targetY <= 0.25*height) {
+  image(targetImage,targetX,targetY);
+  }
+  
 }
 
 function draw() {
