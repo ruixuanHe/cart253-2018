@@ -275,14 +275,21 @@ function drawPlayer() {
 }
 
 // showGameOver()
-//
 // Display text about the game being over!
+// ex03.1 change gameover text, depending on the number of preyEaten
 function showGameOver() {
   textSize(32);
   textAlign(CENTER,CENTER);
   fill(0);
   var gameOverText = "GAME OVER\n";
   gameOverText += "You ate " + preyEaten + " prey\n";
-  gameOverText += "before you died."
+  if ( preyEaten < 3 ) {
+    gameOverText += " Good Job!!!";
+  } else if ( 3<= preyEaten && preyEaten< 10){
+    gameOverText += " SuPeR!!!";
+  }else if ( preyEaten >= 10){
+    gameOverText += " UNBELIEVABLE!!!";
+  }
+
   text(gameOverText,width/2,height/2);
 }
