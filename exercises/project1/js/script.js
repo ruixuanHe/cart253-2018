@@ -24,26 +24,27 @@ var noiseY ;
 // Track whether the game is over
 var gameOver = false;
 
-// Player position, size, velocity
-var playerX;
-var playerY;
-var playerRadius = 25;
-var playerVX = 0;
-var playerVY = 0;
-var playerMaxSpeed = 2;
+// garen position, size, velocity
+var garenX;
+var garenY;
+var garenWidth = 80;
+var garenVX = 0;
+var garenVY = 0;
+var garenMaxSpeed = 2;
+// ex02 add a variable for garenSpeed
+var garenSpeed = 2;
+// garen health
+var garenHealth;
+var garenMaxHealth = 255;
+// garen fill color
+var garenFill = 50;
 
-// ex02 add a variable for playerSpeed
-var playerSpeed = 2;
-// Player health
-var playerHealth;
-var playerMaxHealth = 255;
-// Player fill color
-var playerFill = 50;
+
 
 // teemo position, size, velocity
 var teemoX;
 var teemoY;
-var teemoRadius = 80;
+var teemoWidth = 40;
 var teemoVX;
 var teemoVY;
 var teemoMaxSpeed = 4;
@@ -66,7 +67,7 @@ function setup() {
 
   noStroke();
   setupteemo();
-  setupPlayer();
+  setupgaren();
   setupNoise();
   preload();
 }
@@ -77,7 +78,7 @@ function setupNoise(){
 }
 
 function preload(){
-  //garen = loadImage('assets/images/garen.png');
+  garen = loadImage('assets/images/garen.png');
   teemo = loadImage('assets/images/teemo.png');
   /*map = loadImage('assets/ images/map.jpg');
   backgroundMusic = loadSound('assets/sounds/bgm.mp3');
@@ -97,19 +98,20 @@ function setupteemo() {
 
 }
 
-// setupPlayer()
+// setupgaren()
 //
-// Initialises player position and health
-function setupPlayer() {
-  playerX = 4*width/5;
-  playerY = height/2;
-  playerHealth = playerMaxHealth;
+// Initialises garen position and health
+function setupgaren() {
+  garenX = 4*width/5;
+  garenY = height/2;
+  garenHealth = garenMaxHealth;
+
 }
 
 // draw()
 //
 // While the game is active, checks input
-// updates positions of teemo and player,
+// updates positions of teemo and garen,
 // checks health (dying), checks eating (overlaps)
 // displays the two agents.
 // When the game is over, shows the game over screen.
@@ -119,14 +121,14 @@ function draw() {
   if (!gameOver) {
     handleInput();
 
-    movePlayer();
+    movegaren();
     moveteemo();
 
     updateHealth();
     checkEating();
 
     drawTeemo();
-    drawPlayer();
+    drawgaren();
   }
   else {
     showGameOver();
@@ -135,74 +137,74 @@ function draw() {
 
 // handleInput()
 //
-// Checks arrow keys and adjusts player velocity accordingly
+// Checks arrow keys and adjusts garen velocity accordingly
 function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(LEFT_ARROW)) {
-    playerVX = -playerMaxSpeed;
+    garenVX = -garenMaxSpeed;
   }
   else if (keyIsDown(RIGHT_ARROW)) {
-    playerVX = playerMaxSpeed;
+    garenVX = garenMaxSpeed;
   }
   else {
-    playerVX = 0;
+    garenVX = 0;
   }
 
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
-    playerVY = -playerMaxSpeed;
+    garenVY = -garenMaxSpeed;
   }
   else if (keyIsDown(DOWN_ARROW)) {
-    playerVY = playerMaxSpeed;
+    garenVY = garenMaxSpeed;
   }
   else {
-    playerVY = 0;
+    garenVY = 0;
   }
 
   // ex02 add a ability to sprint, when press shift maxspeed will increase
   //when release it will go bacome to 2
   if(keyIsDown(SHIFT)){
-    playerMaxSpeed += 0.2;
+    garenMaxSpeed += 0.2;
   }
   else {
-    playerMaxSpeed = playerSpeed;
+    garenMaxSpeed = garenSpeed;
   }
 }
 
-// movePlayer()
+// movegaren()
 //
-// Updates player position based on velocity,
+// Updates garen position based on velocity,
 // wraps around the edges.
-function movePlayer() {
+function movegaren() {
   // Update position
-  playerX += playerVX;
-  playerY += playerVY;
+  garenX += garenVX;
+  garenY += garenVY;
 
-  // Wrap when player goes off the canvas
-  if (playerX < 0) {
-    playerX += width;
+  // Wrap when garen goes off the canvas
+  if (garenX < 0) {
+    garenX += width;
   }
-  else if (playerX > width) {
-    playerX -= width;
+  else if (garenX > width) {
+    garenX -= width;
   }
 
-  if (playerY < 0) {
-    playerY += height;
+  if (garenY < 0) {
+    garenY += height;
   }
-  else if (playerY > height) {
-    playerY -= height;
+  else if (garenY > height) {
+    garenY -= height;
   }
 }
 
 // updateHealth()
 //
-// Reduce the player's health (every frame)
-// Check if the player is dead
+// Reduce the garen's health (every frame)
+// Check if the garen is dead
 function updateHealth() {
-  // Reduce player health, constrain to reasonable range
-  playerHealth = constrain(playerHealth - 0.5,0,playerMaxHealth);
-  // Check if the player is dead
-  if (playerHealth === 0) {
+  // Reduce garen health, constrain to reasonable range
+  garenHealth = constrain(garenHealth - 0.5,0,garenMaxHealth);
+  // Check if the garen is dead
+  if (garenHealth === 0) {
     // If so, the game is over
     gameOver = true;
   }
@@ -210,14 +212,14 @@ function updateHealth() {
 
 // checkEating()
 //
-// Check if the player overlaps the teemo and updates health of both
+// Check if the garen overlaps the teemo and updates health of both
 function checkEating() {
-  // Get distance of player to teemo
-  var d = dist(playerX,playerY,teemoX,teemoY);
+  // Get distance of garen to teemo
+  var d = dist(garenX,garenY,teemoX,teemoY);
   // Check if it's an overlap
-  if (d < playerRadius + teemoRadius) {
-    // Increase the player health
-    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
+  if (d < garenWidth + teemoWidth) {
+    // Increase the garen health
+    garenHealth = constrain(garenHealth + eatHealth,0,garenMaxHealth);
     // Reduce the teemo health
     teemoHealth = constrain(teemoHealth - eatHealth,0,teemoMaxHealth);
 
@@ -283,15 +285,15 @@ function moveteemo() {
 // Draw the teemo as an ellipse with alpha based on health
 function drawTeemo() {
 
-  image(teemo,teemoX,teemoY,teemoRadius,teemoRadius);
+  image(teemo,teemoX,teemoY,teemoWidth,teemoWidth);
 }
 
-// drawPlayer()
+// drawgaren()
 //
-// Draw the player as an ellipse with alpha based on health
-function drawPlayer() {
-  fill(playerFill,playerHealth);
-  ellipse(playerX,playerY,playerRadius*2);
+// Draw the garen as an ellipse with alpha based on health
+function drawgaren() {
+
+  image(garen,garenX,garenY,garenWidth,garenWidth);
 }
 
 // showGameOver()
