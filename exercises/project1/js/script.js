@@ -23,6 +23,9 @@ var playerRadius = 25;
 var playerVX = 0;
 var playerVY = 0;
 var playerMaxSpeed = 2;
+
+// ex02 add a variable for playerSpeed
+var playerSpeed = 2;
 // Player health
 var playerHealth;
 var playerMaxHealth = 255;
@@ -134,6 +137,15 @@ function handleInput() {
   }
   else {
     playerVY = 0;
+  }
+
+  // ex02 add a ability to sprint, when press shift maxspeed will increase
+  //when release it will go bacome to 2
+  if(keyIsDown(SHIFT)){
+    playerMaxSpeed += 0.2;
+  }
+  else {
+    playerMaxSpeed = playerSpeed;
   }
 }
 
