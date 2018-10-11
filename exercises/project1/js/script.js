@@ -9,6 +9,14 @@ Physics-based movement, keyboard controls, health/stamina,
 sprinting, random movement, screen wrap.
 
 ******************************************************/
+// ex05 variable
+var map;
+var garen;
+var teemo;
+var backgroundMusic;
+var garenAttack;
+var garenShift;
+var teemoLaugh;
 // ex01 noise variable
 var noiseX ;
 var noiseY ;
@@ -32,23 +40,23 @@ var playerMaxHealth = 255;
 // Player fill color
 var playerFill = 50;
 
-// Prey position, size, velocity
-var preyX;
-var preyY;
-var preyRadius = 25;
-var preyVX;
-var preyVY;
-var preyMaxSpeed = 4;
-// Prey health
-var preyHealth;
-var preyMaxHealth = 100;
-// Prey fill color
-var preyFill = 200;
+// teemo position, size, velocity
+var teemoX;
+var teemoY;
+var teemoRadius = 80;
+var teemoVX;
+var teemoVY;
+var teemoMaxSpeed = 4;
+// teemo health
+var teemoHealth;
+var teemoMaxHealth = 100;
+// teemo fill color
+var teemoFill = 200;
 
-// Amount of health obtained per frame of "eating" the prey
+// Amount of health obtained per frame of "eating" the teemo
 var eatHealth = 10;
-// Number of prey eaten during the game
-var preyEaten = 0;
+// Number of teemo eaten during the game
+var teemoEaten = 0;
 
 // setup()
 //
@@ -57,24 +65,36 @@ function setup() {
   createCanvas(500,500);
 
   noStroke();
-
-  setupPrey();
+  setupteemo();
   setupPlayer();
-
+  setupNoise();
+  preload();
+}
+function setupNoise(){
   //setup the noise value
   noiseX = 33;
   noiseY = 74;
 }
 
-// setupPrey()
+function preload(){
+  //garen = loadImage('assets/images/garen.png');
+  teemo = loadImage('assets/images/teemo.png');
+  /*map = loadImage('assets/ images/map.jpg');
+  backgroundMusic = loadSound('assets/sounds/bgm.mp3');
+  garenShift= loadSound('assets/sounds/shift.wav');
+  garenAttack= loadSound('assets/sounds/attack.wav');
+  teemoLaugh = loadSound('assets/sounds/teemo_4.mp3');*/
+}
+// setupteemo()
 //
-// Initialises prey's position, velocity, and health
-function setupPrey() {
-  preyX = width/5;
-  preyY = height/2;
-  preyVX = -preyMaxSpeed;
-  preyVY = preyMaxSpeed;
-  preyHealth = preyMaxHealth;
+// Initialises teemo's position, velocity, and health
+function setupteemo() {
+  teemoX = width/5;
+  teemoY = height/2;
+  teemoVX = -teemoMaxSpeed;
+  teemoVY = teemoMaxSpeed;
+  teemoHealth = teemoMaxHealth;
+
 }
 
 // setupPlayer()
@@ -89,7 +109,7 @@ function setupPlayer() {
 // draw()
 //
 // While the game is active, checks input
-// updates positions of prey and player,
+// updates positions of teemo and player,
 // checks health (dying), checks eating (overlaps)
 // displays the two agents.
 // When the game is over, shows the game over screen.
@@ -100,12 +120,12 @@ function draw() {
     handleInput();
 
     movePlayer();
-    movePrey();
+    moveteemo();
 
     updateHealth();
     checkEating();
 
-    drawPrey();
+    drawTeemo();
     drawPlayer();
   }
   else {
@@ -190,80 +210,80 @@ function updateHealth() {
 
 // checkEating()
 //
-// Check if the player overlaps the prey and updates health of both
+// Check if the player overlaps the teemo and updates health of both
 function checkEating() {
-  // Get distance of player to prey
-  var d = dist(playerX,playerY,preyX,preyY);
+  // Get distance of player to teemo
+  var d = dist(playerX,playerY,teemoX,teemoY);
   // Check if it's an overlap
-  if (d < playerRadius + preyRadius) {
+  if (d < playerRadius + teemoRadius) {
     // Increase the player health
     playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
-    // Reduce the prey health
-    preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
+    // Reduce the teemo health
+    teemoHealth = constrain(teemoHealth - eatHealth,0,teemoMaxHealth);
 
-    // Check if the prey died
-    if (preyHealth === 0) {
-      // Move the "new" prey to a random position
-      preyX = random(0,width);
-      preyY = random(0,height);
+    // Check if the teemo died
+    if (teemoHealth === 0) {
+      // Move the "new" teemo to a random position
+      teemoX = random(0,width);
+      teemoY = random(0,height);
       // Give it full health
-      preyHealth = preyMaxHealth;
-      // Track how many prey were eaten
-      preyEaten++;
+      teemoHealth = teemoMaxHealth;
+      // Track how many teemo were eaten
+      teemoEaten++;
     }
   }
 }
 
-// movePrey()
+// moveteemo()
 //
-// Moves the prey based on random velocity changes
-function movePrey() {
-  // Change the prey's velocity at random intervals
-  // random() will be < 0.05 5% of the time, so the prey
+// Moves the teemo based on random velocity changes
+function moveteemo() {
+  // Change the teemo's velocity at random intervals
+  // random() will be < 0.05 5% of the time, so the teemo
   // will change direction on 5% of frames
   /*if (random() < 0.05) {
     // Set velocity based on random values to get a new direction
     // and speed of movement
     // Use map() to convert from the 0-1 range of the random() function
-    // to the appropriate range of velocities for the prey
-    preyVX = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
-    preyVY = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
+    // to the appropriate range of velocities for the teemo
+    teemoVX = map(random(),0,1,-teemoMaxSpeed,teemoMaxSpeed);
+    teemoVY = map(random(),0,1,-teemoMaxSpeed,teemoMaxSpeed);
   }*/
 
 
-  preyVX = map(noise(noiseX),0,1,-preyMaxSpeed,preyMaxSpeed);
-  preyVY = map(noise(noiseY),0,1,-preyMaxSpeed,preyMaxSpeed);
+  teemoVX = map(noise(noiseX),0,1,-teemoMaxSpeed,teemoMaxSpeed);
+  teemoVY = map(noise(noiseY),0,1,-teemoMaxSpeed,teemoMaxSpeed);
 
 
-  // Update prey position based on velocity
-  preyX += preyVX;
-  preyY += preyVY;
+  // Update teemo position based on velocity
+  teemoX += teemoVX;
+  teemoY += teemoVY;
 
 
   noiseX += 0.01;
   noiseY += 0.01;
   // Screen wrapping
-  if (preyX < 0) {
-    preyX += width;
+  if (teemoX < 0) {
+    teemoX += width;
   }
-  else if (preyX > width) {
-    preyX -= width;
+  else if (teemoX > width) {
+    teemoX -= width;
   }
 
-  if (preyY < 0) {
-    preyY += height;
+  if (teemoY < 0) {
+    teemoY += height;
   }
-  else if (preyY > height) {
-    preyY -= height;
+  else if (teemoY > height) {
+    teemoY -= height;
   }
 }
 
-// drawPrey()
+// drawTeemo()
 //
-// Draw the prey as an ellipse with alpha based on health
-function drawPrey() {
-  fill(preyFill,preyHealth);
-  ellipse(preyX,preyY,preyRadius*2);
+// Draw the teemo as an ellipse with alpha based on health
+function drawTeemo() {
+
+  image(teemo,teemoX,teemoY,teemoRadius,teemoRadius);
 }
 
 // drawPlayer()
@@ -276,18 +296,18 @@ function drawPlayer() {
 
 // showGameOver()
 // Display text about the game being over!
-// ex03.1 change gameover text, depending on the number of preyEaten
+// ex03.1 change gameover text, depending on the number of teemoEaten
 function showGameOver() {
   textSize(32);
   textAlign(CENTER,CENTER);
   fill(0);
   var gameOverText = "GAME OVER\n";
-  gameOverText += "You ate " + preyEaten + " prey\n";
-  if ( preyEaten < 3 ) {
+  gameOverText += "You ate " + teemoEaten + " teemo\n";
+  if ( teemoEaten < 3 ) {
     gameOverText += " Good Job!!!";
-  } else if ( 3<= preyEaten && preyEaten< 10){
+  } else if ( 3<= teemoEaten && teemoEaten< 10){
     gameOverText += " SuPeR!!!";
-  }else if ( preyEaten >= 10){
+  }else if ( teemoEaten >= 10){
     gameOverText += " UNBELIEVABLE!!!";
   }
 
