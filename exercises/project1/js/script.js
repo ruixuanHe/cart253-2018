@@ -82,10 +82,12 @@ function preload() {
 	garen = loadImage('assets/images/garen.png');
 	teemo = loadImage('assets/images/teemo.png');
  	backgroundImage = loadImage('assets/images/map.png');
-	/*backgroundMusic = loadSound('assets/sounds/bgm.mp3');
-	garenShift= loadSound('assets/sounds/shift.wav');
-	garenAttack= loadSound('assets/sounds/attack.wav');
-	teemoLaugh = loadSound('assets/sounds/teemo_4.mp3');*/
+
+
+	backgroundMusic = new Audio('assets/sounds/bgm.mp3');
+	garenShift= new Audio('assets/sounds/garenAttack.wav');
+	garenAttack= new Audio('assets/sounds/attack.wav');
+	teemoLaugh = new Audio('assets/sounds/teemo_4.mp3');
 }
 // setupteemo()
 //
@@ -119,6 +121,8 @@ function setupgaren() {
 function draw() {
 	 image(backgroundImage,width/2,height/2,width,height);
 
+	 backgroundMusic.play();
+	
 	if (!gameOver) {
 
 		handleInput();
@@ -132,7 +136,9 @@ function draw() {
 		drawTeemo();
 		drawgaren();
 	} else {
+		backgroundMusic.pause();
 		showGameOver();
+
 	}
 }
 
@@ -165,6 +171,7 @@ function handleInput() {
 	} else {
 		garenMaxSpeed = garenSpeed;
 	}
+
 }
 
 // movegaren()
@@ -198,6 +205,11 @@ function updateHealth() {
 	// Reduce garen health, constrain to reasonable range
 	garenHealth = constrain(garenHealth - 0.5, 0, garenMaxHealth);
 	// Check if the garen is dead
+	// play teemo's laugh when garen is dying
+	if (garenHealth >0 &&garenHealth <= 50){
+		teemoLaugh.play();
+
+	}
 	if (garenHealth === 0) {
 		// If so, the game is over
 		gameOver = true;
@@ -219,6 +231,7 @@ function checkEating() {
 
 		// Check if the teemo died
 		if (teemoHealth === 0) {
+			garenAttack.play();
 			// Move the "new" teemo to a random position
 			teemoX = random(0, width);
 			teemoY = random(0, height);
