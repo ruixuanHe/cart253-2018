@@ -122,7 +122,7 @@ function draw() {
 	 image(backgroundImage,width/2,height/2,width,height);
 
 	 backgroundMusic.play();
-	
+
 	if (!gameOver) {
 
 		handleInput();
@@ -307,7 +307,7 @@ function drawgaren() {
 function showGameOver() {
 	textSize(32);
 	textAlign(CENTER, CENTER);
-	fill(0);
+	fill(66, 220, 244);
 	var gameOverText = "GAME OVER\n";
 	gameOverText += "You ate " + teemoEaten + " teemo\n";
 	if (teemoEaten < 3) {
