@@ -216,7 +216,14 @@ function movegaren() {
 function updateHealth() {
 	//ex04 change the values
 	// Reduce garen health, constrain to reasonable range
-	garenHealth = constrain(garenHealth - 1, 0, garenMaxHealth);
+	//ex02 when press shift reduce health quckier
+	if (keyIsDown(SHIFT)) {
+    garenHealth = constrain(garenHealth - 0.8, 0, garenMaxHealth);
+  }
+  else {
+    garenHealth = constrain(garenHealth - 0.4, 0, garenMaxHealth);
+  }
+
 	// Check if the garen is dead
 	// play teemo's laugh when garen is dying
 	if (garenHealth >0 &&garenHealth <= 70){
@@ -336,7 +343,7 @@ function showGameOver() {
 	textAlign(CENTER, CENTER);
 	fill(66, 220, 244);
 	var gameOverText = "GAME OVER\n";
-	gameOverText += "You ate " + teemoEaten + " teemo\n";
+	gameOverText += "You kill " + teemoEaten + " teemo\n";
 	if (teemoEaten < 3) {
 		gameOverText += " Good Job!!!";
 	} else if (3 <= teemoEaten && teemoEaten < 10) {
