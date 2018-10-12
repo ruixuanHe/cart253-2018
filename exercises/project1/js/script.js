@@ -43,12 +43,13 @@ var garenFill = 50;
 
 
 // teemo position, size, velocity
+//ex04 change values
 var teemoX;
 var teemoY;
 var teemoWidth = 40;
 var teemoVX;
 var teemoVY;
-var teemoMaxSpeed = 4;
+var teemoMaxSpeed = 6;
 // teemo health
 var teemoHealth;
 var teemoMaxHealth = 100;
@@ -203,8 +204,9 @@ function movegaren() {
 // Reduce the garen's health (every frame)
 // Check if the garen is dead
 function updateHealth() {
+	//ex04 change the values
 	// Reduce garen health, constrain to reasonable range
-	garenHealth = constrain(garenHealth - 0.5, 0, garenMaxHealth);
+	garenHealth = constrain(garenHealth - 0.3, 0, garenMaxHealth);
 	// Check if the garen is dead
 	// play teemo's laugh when garen is dying
 	if (garenHealth >0 &&garenHealth <= 70){
