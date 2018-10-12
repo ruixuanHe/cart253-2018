@@ -243,6 +243,8 @@ function checkEating() {
 			garenWidth += 2;
 			//ex03.3 bigger size means the game will become easier, for the balance, decrease the monvment speed
 			garenMaxSpeed -= 0.2;
+			//ex03.4 increase teemo's speed to increase difficulty
+			teemoMaxSpeed += 0.2;
 		}
 	}
 }
