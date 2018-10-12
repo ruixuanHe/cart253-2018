@@ -239,6 +239,10 @@ function checkEating() {
 			teemoHealth = teemoMaxHealth;
 			// Track how many teemo were eaten
 			teemoEaten++;
+			//ex03.2 after kill teemo garen becomes bigger, and player can build a big garen
+			garenWidth += 2;
+			//ex03.3 bigger size means the game will become easier, for the balance, decrease the monvment speed
+			garenMaxSpeed -= 0.2;
 		}
 	}
 }
