@@ -24,7 +24,8 @@ var noiseY;
 var warnningText;
 // Track whether the game is over
 var gameOver = false;
-
+// ex04 track whether the game is win
+var win = false;
 // garen position, size, velocity
 var garenX;
 var garenY;
@@ -125,7 +126,7 @@ function draw() {
 
 	 backgroundMusic.play();
 
-	if (!gameOver) {
+	if (!gameOver && !win) {
 
 		handleInput();
 
@@ -137,10 +138,14 @@ function draw() {
 
 		drawTeemo();
 		drawgaren();
-	} else {
+
+		checkGarenSize()
+	} else if (gameOver == true){
 		backgroundMusic.pause();
 		showGameOver();
 
+	} else if ( win == true){
+		showGameWin();
 	}
 }
 
@@ -221,7 +226,11 @@ function updateHealth() {
 		gameOver = true;
 	}
 }
-
+function checkGarenSize(){
+	if (garenWidth > width){
+		win = true;
+	}
+}
 // checkEating()
 //
 // Check if the garen overlaps the teemo and updates health of both
@@ -246,7 +255,7 @@ function checkEating() {
 			// Track how many teemo were eaten
 			teemoEaten++;
 			//ex03.2 after kill teemo garen becomes bigger, and player can build a big garen
-			garenWidth += 2;
+			garenWidth += 10;
 			//ex03.3 bigger size means the game will become easier, for the balance, decrease the monvment speed
 			garenMaxSpeed -= 0.2;
 			//ex03.4 increase teemo's speed to increase difficulty
@@ -329,6 +338,15 @@ function showGameOver() {
 	} else if (teemoEaten >= 10) {
 		gameOverText += " UNBELIEVABLE!!!";
 	}
+
+	text(gameOverText, width / 2, height / 2);
+}
+function showGameWin() {
+	textSize(32);
+	textAlign(CENTER, CENTER);
+	fill(66, 220, 244);
+	var gameOverText = "You Win!!!!";
+
 
 	text(gameOverText, width / 2, height / 2);
 }
