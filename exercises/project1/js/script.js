@@ -221,7 +221,7 @@ function updateHealth() {
     garenHealth = constrain(garenHealth - 0.8, 0, garenMaxHealth);
   }
   else {
-    garenHealth = constrain(garenHealth - 0.4, 0, garenMaxHealth);
+    garenHealth = constrain(garenHealth - 0.5, 0, garenMaxHealth);
   }
 
 	// Check if the garen is dead
@@ -250,7 +250,7 @@ function checkEating() {
 	// Get distance of garen to teemo
 	var d = dist(garenX, garenY, teemoX, teemoY);
 	// Check if it's an overlap
-	if (d < garenWidth +
+	if (d <= garenWidth +
 		 teemoWidth) {
 		// Increase the garen health
 		garenHealth = constrain(garenHealth + eatHealth, 0, garenMaxHealth);
@@ -344,7 +344,7 @@ function showGameOver() {
 	fill(66, 220, 244);
 	var gameOverText = "GAME OVER\n";
 	gameOverText += "You kill " + teemoEaten + " teemo\n";
-	if (teemoEaten < 3) {
+	if (teemoEaten < 3 && teemoEaten >0) {
 		gameOverText += " Good Job!!!";
 	} else if (3 <= teemoEaten && teemoEaten < 10) {
 		gameOverText += " SuPeR!!!";
@@ -360,6 +360,5 @@ function showGameWin() {
 	fill(66, 220, 244);
 	var gameOverText = "You Win!!!!";
 	text(gameOverText, width / 2, height / 2);
-	winningSound.play();
 
 }
