@@ -17,6 +17,7 @@ var backgroundMusic;
 var garenAttack;
 var garenShift;
 var teemoLaugh;
+var winningSound;
 // ex01 noise variable
 var noiseX;
 var noiseY;
@@ -32,9 +33,9 @@ var garenY;
 var garenWidth = 80;
 var garenVX = 0;
 var garenVY = 0;
-var garenMaxSpeed = 2;
+var garenMaxSpeed = 1.5;
 // ex02 add a variable for garenSpeed
-var garenSpeed = 2;
+var garenSpeed = 1.5;
 // garen health
 var garenHealth;
 var garenMaxHealth = 255;
@@ -87,10 +88,11 @@ function preload() {
  	backgroundImage = loadImage('assets/images/map.png');
 
 
-	backgroundMusic = new Audio('assets/sounds/bgm.mp3');
+	backgroundMusic = new Audio('assets/sounds/bgm_01.mp3');
 	garenShift= new Audio('assets/sounds/garenAttack.wav');
-	garenAttack= new Audio('assets/sounds/attack.wav');
+	garenAttack= new Audio('assets/sounds/attack.mp3');
 	teemoLaugh = new Audio('assets/sounds/teemo_4.mp3');
+	winningSound = new Audio ('assets/sounds/winning.mp3');
 }
 // setupteemo()
 //
@@ -145,7 +147,10 @@ function draw() {
 		showGameOver();
 
 	} else if ( win == true){
+		backgroundMusic.pause();
 		showGameWin();
+
+
 	}
 }
 
@@ -211,7 +216,7 @@ function movegaren() {
 function updateHealth() {
 	//ex04 change the values
 	// Reduce garen health, constrain to reasonable range
-	garenHealth = constrain(garenHealth - 0.3, 0, garenMaxHealth);
+	garenHealth = constrain(garenHealth - 1, 0, garenMaxHealth);
 	// Check if the garen is dead
 	// play teemo's laugh when garen is dying
 	if (garenHealth >0 &&garenHealth <= 70){
@@ -238,7 +243,8 @@ function checkEating() {
 	// Get distance of garen to teemo
 	var d = dist(garenX, garenY, teemoX, teemoY);
 	// Check if it's an overlap
-	if (d < garenWidth + teemoWidth) {
+	if (d < garenWidth +
+		 teemoWidth) {
 		// Increase the garen health
 		garenHealth = constrain(garenHealth + eatHealth, 0, garenMaxHealth);
 		// Reduce the teemo health
@@ -346,7 +352,7 @@ function showGameWin() {
 	textAlign(CENTER, CENTER);
 	fill(66, 220, 244);
 	var gameOverText = "You Win!!!!";
-
-
 	text(gameOverText, width / 2, height / 2);
+	winningSound.play();
+
 }
