@@ -20,7 +20,8 @@ var teemoLaugh;
 // ex01 noise variable
 var noiseX;
 var noiseY;
-
+//ex03.5
+var warnningText;
 // Track whether the game is over
 var gameOver = false;
 
@@ -206,9 +207,12 @@ function updateHealth() {
 	garenHealth = constrain(garenHealth - 0.5, 0, garenMaxHealth);
 	// Check if the garen is dead
 	// play teemo's laugh when garen is dying
-	if (garenHealth >0 &&garenHealth <= 50){
+	if (garenHealth >0 &&garenHealth <= 70){
 		teemoLaugh.play();
-
+		textAlign(CENTER);
+		fill(56, 220, 244);
+		warnningText = " Hurry, You are dying!"
+		text(warnningText,width/2,10);
 	}
 	if (garenHealth === 0) {
 		// If so, the game is over
