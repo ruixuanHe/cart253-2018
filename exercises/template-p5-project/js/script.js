@@ -10,17 +10,30 @@ author, and this description to match your project!
 
 // setup()
 //
-// Description of setup
-var x = 0;
 function setup() {
   createCanvas(500,500);
+  // Default style settings for text, shape, and color
+  textSize(32);
+  textAlign(CENTER,CENTER);
+  rectMode(CENTER);
+  fill(255,0,0);
+  noStroke();
 }
 function draw() {
-}
-function mousePressed() {
-  // Increase x by 1 half the time
-  if (random() < 0.5) {
-    x = x + 1;
-    console.log("x increased to " + x + "!");
+  background(255);
+  rect(width/2,height/2,100,100);
+  push(); // Save the current settings (the defaults in this case)
+  fill(0); // Make a change for this specific case
+  text("This is nice!",width/2,height/2);
+  pop(); // Restore the settings (the defaults)
+  // fill() goes back to red)
+  if (mouseIsPressed) {
+    push(); // Save the current settings (still the defaults)
+    textSize(200);
+    textAlign(LEFT,CENTER);
+    text("!!!!!!!!!!!!",0,height/2);
+    pop(); // Restore the settings (the defaults)
+    // textSize() goes back to 32
+    // textAlign() goes back to CENTER, CENTER
   }
 }
