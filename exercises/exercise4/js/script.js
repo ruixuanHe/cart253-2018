@@ -1,5 +1,5 @@
 // Pong
-// by Pippin Barr
+// by Pippin Barr & Ruixuan He 40000330
 //
 // A primitive implementation of Pong with no scoring system
 // just the ability to play the game with the keyboard.
@@ -7,6 +7,10 @@
 // Game colors
 var bgColor = 0;
 var fgColor = 255;
+///////// NEW /////////
+var leftPaddleScore = 0;
+var rightPaddleScore = 0;
+///////// END NEW /////////
 
 // BALL
 
@@ -40,6 +44,7 @@ var leftPaddle = {
   speed: 5,
   upKeyCode: 87, // The key code for W
   downKeyCode: 83 // The key code for S
+
 }
 
 // RIGHT PADDLE
@@ -56,6 +61,7 @@ var rightPaddle = {
   speed: 5,
   upKeyCode: 38, // The key code for the UP ARROW
   downKeyCode: 40 // The key code for the DOWN ARROW
+
 }
 
 // A variable to hold the beep sound we will play on bouncing
@@ -251,17 +257,36 @@ function handleBallOffScreen() {
   // Calculate edges of ball for clearer if statement below
   var ballLeft = ball.x - ball.size/2;
   var ballRight = ball.x + ball.size/2;
-
+  ///////// NEW /////////
   // Check for ball going off the sides
-  if (ballRight < 0 || ballLeft > width) {
+  if ( ballLeft > width) {
+    //update score and display it at console
+    leftPaddleScore ++;
+    console.log("leftPaddle score: "+ leftPaddleScore+"\n");
+    console.log("rightPaddle score: "+ rightPaddleScore+"\n");
+
     // If it went off either side, reset it to the centre
     ball.x = width/2;
     ball.y = height/2;
+  }
+
+  if ( ballRight < 0 ){
+    //update score and display it at console
+    rightPaddleScore ++;
+    console.log("leftPaddle score: "+ leftPaddleScore+"\n");
+    console.log("rightPaddle score: "+ rightPaddleScore+"\n");
+
+    // If it went off either side, reset it to the centre
+    ball.x = width/2;
+    ball.y = height/2;
+  }
+  ///////// END NEW /////////
     // NOTE that we don't change its velocity here so it just
     // carries on moving with the same velocity after its
     // position is reset.
     // This is where we would count points etc!
-  }
+
+
 }
 
 // displayBall()
