@@ -158,6 +158,7 @@ function draw() {
   leftWin = false;
   rightWin = false;
   ///////// END NEW /////////
+
   // Display the paddles and ball
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
@@ -280,11 +281,13 @@ function handleBallOffScreen() {
     leftPaddleScore++;
     leftWin = true;
     console.log("leftPaddle score: " + leftPaddleScore + "\n");
-    console.log("rightPaddle score: " + rightPaddleScore + "\n");
+    console.log("rightPaddle score: " + rightPaddleScore + "\n"+ ball.vy);
 
     // If it went off either side, reset it to the centre
     ball.x = width / 2;
     ball.y = height / 2;
+    //call reset function
+    reset();
   }
 
   if (ballRight < 0) {
@@ -292,11 +295,13 @@ function handleBallOffScreen() {
     rightPaddleScore++;
     rightWin = true;
     console.log("leftPaddle score: " + leftPaddleScore + "\n");
-    console.log("rightPaddle score: " + rightPaddleScore + "\n");
+    console.log("rightPaddle score: " + rightPaddleScore + "\n"+ ball.vy);
 
     // If it went off either side, reset it to the centre
     ball.x = width / 2;
     ball.y = height / 2;
+    //call reset function
+    reset();
   }
   ///////// END NEW /////////
   // NOTE that we don't change its velocity here so it just
@@ -334,8 +339,20 @@ function displayScore() {
     rightPaddle.h = constrain(rightPaddle.h, 35, 70);
     rightPaddle.w = constrain(rightPaddle.w, 30, 45);
   }
+}
+//challenge 3 function reset
+//change its vx depending on leftPaddleScore and rightPaddleScore
+//change its vy to a random number
+function reset(){
+  if ( leftPaddleScore > rightPaddleScore){
+    if(ball.vx >0 ) ball.vx = -ball.vx;
 
+  }
+  if (rightPaddleScore > leftPaddleScore){
+    if(ball.vx <0 ) ball.vx = -ball.vx;
 
+  }
+  ball.vy = map(random(0,25),0,25,-ball.speed,ball.speed);
 }
 ///////// END NEW /////////
 // displayBall()
