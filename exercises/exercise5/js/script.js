@@ -55,6 +55,9 @@ function draw() {
   //call updateScore() method
   leftPaddle.updateScore();
   rightPaddle.updateScore();
+  //call displayScore() method
+  leftPaddle.displayScore();
+  rightPaddle.displayScore();
   ///////// END NEW /////////
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);

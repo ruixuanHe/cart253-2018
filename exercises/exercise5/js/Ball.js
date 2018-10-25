@@ -16,7 +16,7 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
-  this.WinningSide = null;
+  this.winningSide = null;
 }
 ///////// END NEW /////////
 // update()
@@ -48,7 +48,7 @@ Ball.prototype.update = function () {
 Ball.prototype.isOffScreen = function () {
   // Check for going off the left side of creen and reset if so
   if (this.x + this.size < 0 ) {
-    this.WinningSide = "left";
+    this.winningSide = "left";
     return true;
   }
   /// Check for going off the right side of creen and reset if so

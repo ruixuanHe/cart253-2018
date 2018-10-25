@@ -60,6 +60,24 @@ this.score ++;
 ball.winningSide = null;
 }
 }
+// displayScore()
+//
+// display the score at left up corner or right up corner depending on the side
+//of paddle
+Paddle.prototype.displayScore = function(){
+//push() and pop() method to store current setting
+push();
+fill(66, 244, 244);
+textSize(30);
+var gameScore = this.score;
+if(this.paddleSide == "right"){
+  text (gameScore, 0.25*width,0.15*height)
+}
+if(this.paddleSide == "left"){
+  text (gameScore, 0.75*width,0.15*height)
+}
+pop();
+}
 ///////// END NEW /////////
 // display()
 //
