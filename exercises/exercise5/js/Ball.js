@@ -90,7 +90,13 @@ Ball.prototype.handleCollision = function(paddle) {
 // reset()
 //
 // Set position back to the middle of the screen
+///////// NEW /////////
+// modify reset method() ball toward the paddle that won the most recent point
+// with random Y velocity
 Ball.prototype.reset = function () {
   this.x = width/2;
   this.y = height/2;
+  this.vx = -this.vx;
+  this.vy = map(random(0, 25), 0, 25, -this.speed, this.speed);
 }
+///////// END NEW /////////
