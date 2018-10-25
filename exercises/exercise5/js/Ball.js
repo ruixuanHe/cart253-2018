@@ -35,6 +35,10 @@ Ball.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+    ///////// NEW /////////
+    //play the sound of collisions
+    beepSFX.play();
+    ///////// END NEW /////////
   }
 }
 
@@ -64,10 +68,12 @@ Ball.prototype.isOffScreen = function () {
 // display()
 //
 // Draw the ball as a rectangle on the screen
+///////// NEW /////////
+//display teemo Image instead of a rectangle
 Ball.prototype.display = function () {
-  fill(255);
-  rect(this.x,this.y,this.size,this.size);
+  image(teemoImage,this.x,this.y,this.size,this.size);
 }
+///////// END NEW /////////
 
 // handleCollision(paddle)
 //
@@ -83,6 +89,10 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      ///////// NEW /////////
+      //play the sound of collisions
+      beepSFX.play();
+      ///////// END NEW /////////
     }
   }
 }

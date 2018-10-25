@@ -7,6 +7,9 @@
 //
 // Sets the properties with the provided arguments or defaults
 ///////// NEW /////////
+// add two variables for background color
+var bgColorR = 0;
+var bgColorB = 0;
 // challenge: add properties paddleSide
 function Paddle(x,y,w,h,speed,downKey,upKey,paddleSide) {
   this.x = x;
@@ -50,14 +53,40 @@ Paddle.prototype.update = function() {
 // updateScore()
 //
 // challenge: update the socre of paddle depending on winning side
+// change the if condition so, winning paddle side will change its width and height,
+// and the background color will turn to red or blue, play the laughing sounds
 Paddle.prototype.updateScore = function(){
-if(ball.winningSide == "right" && this.paddleSide == "right"){
-this.score ++;
-ball.winningSide = null;
+//update background color everytime
+background(bgColorR, 130, bgColorB);
+//update paddle shape and background color
+//if left paddle win, background color will turn red
+//if right paddle win, background color will turn blue
+//using constrain method to prevent value overflow
+if (ball.winningSide == "right" && this.paddleSide == "right") {
+  this.score ++;
+  this.h -= 1.5;
+  this.w += 1.5;
+  this.h = constrain(this.h, 35, 70);
+  this.w = constrain(this.w, 30, 45);
+  bgColorB += 50;
+  bgColorR -= 100;
+  bgColorB = constrain(bgColorB, 0, 255);
+  bgColorR = constrain(bgColorR, 0, 255);
+  laughSound2.play();
+  ball.winningSide = null;
 }
 if(ball.winningSide == "left" && this.paddleSide == "left"){
-this.score ++;
-ball.winningSide = null;
+  this.score ++;
+  this.h -= 1.5;
+  this.w += 1.5;
+  this.h = constrain(this.h, 35, 70);
+  this.w = constrain(this.w, 30, 45);
+  bgColorR += 50;
+  bgColorB -= 100;
+  bgColorB = constrain(bgColorB, 0, 255);
+  bgColorR = constrain(bgColorR, 0, 255);
+  laughSound1.play();
+  ball.winningSide = null;
 }
 }
 // displayScore()
@@ -82,7 +111,17 @@ pop();
 // display()
 //
 // Draw the paddle as a rectangle on the screen
+///////// NEW /////////
+// modify display function(), change the color of paddle depending on the side
 Paddle.prototype.display = function() {
-  fill(255);
+  push();
+  if(this.paddleSide == "right"){
+    fill('#c0f7e9');
+  }
+  if(this.paddleSide == "left"){
+    fill('#f7c0e7');
+  }
   rect(this.x,this.y,this.w,this.h);
+  pop();
 }
+///////// END NEW /////////
