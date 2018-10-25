@@ -9,7 +9,7 @@
 // Sets the properties with the provided arguments
 ///////// NEW /////////
 //challenge: add properties winningSide
-function Ball(x,y,vx,vy,size,speed) {
+function Ball(x, y, vx, vy, size, speed) {
   this.x = x;
   this.y = y;
   this.vx = vx;
@@ -24,13 +24,13 @@ function Ball(x,y,vx,vy,size,speed) {
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
-Ball.prototype.update = function () {
+Ball.prototype.update = function() {
   // Update position with velocity
   this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
-  this.y = constrain(this.y,0,height-this.size);
+  this.y = constrain(this.y, 0, height - this.size);
 
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
@@ -49,18 +49,17 @@ Ball.prototype.update = function () {
 ///////// NEW /////////
 // change the if condition, if the ball has moved off the right side of screen,
 // it will update winning side to rightPaddle, same for the left side.
-Ball.prototype.isOffScreen = function () {
+Ball.prototype.isOffScreen = function() {
   // Check for going off the left side of creen and reset if so
-  if (this.x + this.size < 0 ) {
+  if (this.x + this.size < 0) {
     this.winningSide = "left";
     return true;
   }
   /// Check for going off the right side of creen and reset if so
-  else if (this.x -this.size > width) {
+  else if (this.x - this.size > width) {
     this.winningSide = "right";
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -70,8 +69,8 @@ Ball.prototype.isOffScreen = function () {
 // Draw the ball as a rectangle on the screen
 ///////// NEW /////////
 //display teemo Image instead of a rectangle
-Ball.prototype.display = function () {
-  image(teemoImage,this.x,this.y,this.size,this.size);
+Ball.prototype.display = function() {
+  image(teemoImage, this.x, this.y, this.size, this.size);
 }
 ///////// END NEW /////////
 
@@ -103,9 +102,9 @@ Ball.prototype.handleCollision = function(paddle) {
 ///////// NEW /////////
 // modify reset method() ball toward the paddle that won the most recent point
 // with random Y velocity
-Ball.prototype.reset = function () {
-  this.x = width/2;
-  this.y = height/2;
+Ball.prototype.reset = function() {
+  this.x = width / 2;
+  this.y = height / 2;
   this.vx = -this.vx;
   this.vy = map(random(0, 25), 0, 25, -this.speed, this.speed);
 }

@@ -26,7 +26,7 @@ var gameStartPlay = false;
 // preload()
 //
 // perload images and sounds
-function preload(){
+function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
   backgroundMusic = new Audio("assets/sounds/bgm.mp3");
   laughSound1 = new Audio("assets/sounds/laugh1.mp3");
@@ -40,7 +40,7 @@ function preload(){
 //
 // Creates the ball and paddles
 function setup() {
-  createCanvas(640,480);
+  createCanvas(640, 480);
   ///////// NEW /////////
   //set rectanlge mode, image mode, and no stroke
   rectMode(CENTER);
@@ -50,20 +50,20 @@ function setup() {
   // Create a ball
   ///////// NEW /////////
   //change the value, to make it performes like ex4
-  ball = new Ball(width/2,height/2,5,5,50,5);
+  ball = new Ball(width / 2, height / 2, 5, 5, 50, 5);
   ///////// END NEW /////////
   // Create the right paddle with UP and DOWN as controls
   ///////// NEW /////////
   // add value "right" in right paddle
   //change the value, to make it performes like ex4
-  rightPaddle = new Paddle(width-50,height/2,20,70,5,DOWN_ARROW,UP_ARROW,"right");
+  rightPaddle = new Paddle(width - 50, height / 2, 20, 70, 5, DOWN_ARROW, UP_ARROW, "right");
   ///////// END NEW /////////
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   ///////// NEW /////////
   // add value "left" in left paddle
   //change the value, to make it performes like ex4
-  leftPaddle = new Paddle(50,height/2,20,70,5,83,87,"left");
+  leftPaddle = new Paddle(50, height / 2, 20, 70, 5, 83, 87, "left");
   ///////// END NEW /////////
 }
 
@@ -120,7 +120,7 @@ function gameStartPlaY() {
 //
 // Draws grass on screen
 function displaygrass() {
-  image(grassImage, width/2, -11, width, 200);
-  image(grassImage, width/2, height-51, width, 200);
+  image(grassImage, width / 2, -11, width, 200);
+  image(grassImage, width / 2, height - 51, width, 200);
 }
 ///////// END NEW /////////
