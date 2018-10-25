@@ -7,6 +7,8 @@
 // Ball constructor
 //
 // Sets the properties with the provided arguments
+///////// NEW /////////
+//challenge: add properties winningSide
 function Ball(x,y,vx,vy,size,speed) {
   this.x = x;
   this.y = y;
@@ -14,8 +16,9 @@ function Ball(x,y,vx,vy,size,speed) {
   this.vy = vy;
   this.size = size;
   this.speed = speed;
+  this.WinningSide = null;
 }
-
+///////// END NEW /////////
 // update()
 //
 // Moves according to velocity, constrains y to be on screen,
@@ -39,16 +42,25 @@ Ball.prototype.update = function () {
 //
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
+///////// NEW /////////
+// change the if condition, if the ball has moved off the right side of screen,
+// it will update winning side to rightPaddle, same for the left side.
 Ball.prototype.isOffScreen = function () {
-  // Check for going off screen and reset if so
-  if (this.x + this.size < 0 || this.x > width) {
+  // Check for going off the left side of creen and reset if so
+  if (this.x + this.size < 0 ) {
+    this.WinningSide = "left";
+    return true;
+  }
+  /// Check for going off the right side of creen and reset if so
+  else if (this.x -this.size > width) {
+    this.winningSide = "right";
     return true;
   }
   else {
     return false;
   }
 }
-
+///////// END NEW /////////
 // display()
 //
 // Draw the ball as a rectangle on the screen

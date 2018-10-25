@@ -6,7 +6,9 @@
 // Paddle constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey) {
+///////// NEW /////////
+// challenge: add properties paddleSide
+function Paddle(x,y,w,h,speed,downKey,upKey,paddleSide) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -16,7 +18,10 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
+  this.score = 0;
+  this.paddleSide = paddleSide;
 }
+///////// END NEW /////////
 
 // handleInput()
 //
@@ -41,7 +46,21 @@ Paddle.prototype.update = function() {
   this.y += this.vy;
   this.y = constrain(this.y,0,height-this.h);
 }
-
+///////// NEW /////////
+// updateScore()
+//
+// challenge: update the socre of paddle depending on winning side
+Paddle.prototype.updateScore = function(){
+if(ball.winningSide == "right" && this.paddleSide == "right"){
+this.score ++;
+ball.winningSide = null;
+}
+if(ball.winningSide == "left" && this.paddleSide == "left"){
+this.score ++;
+ball.winningSide = null;
+}
+}
+///////// END NEW /////////
 // display()
 //
 // Draw the paddle as a rectangle on the screen
