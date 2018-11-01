@@ -43,7 +43,9 @@ function draw() {
   leftPaddle.handleInput();
   rightPaddle.handleInput();
 
-  ball.update;
+  //////////////// FIXED
+  //Syntax error: change "update" to "update()";
+  ball.update();
   leftPaddle.update();
   rightPaddle.update();
 
