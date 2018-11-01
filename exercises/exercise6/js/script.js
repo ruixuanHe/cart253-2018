@@ -25,15 +25,22 @@ function setup() {
   createCanvas(640,480);
   noStroke();
   // Create a ball
-  ball = new Ball(width/2,height/2,50,50,10,50);
+  //////////////// FIXED
+  //logical error: changing the value to have a same ball
+  ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
-  rightPaddle = new Paddle(width-10,height/2,10,600,10,UP_ARROW,DOWN_ARROW);
+  //////////////// FIXED
+  //logical error: mixing up upkey and downkey
+  rightPaddle = new Paddle(width-10,height/2,10,60,10,DOWN_ARROW,UP_ARROW);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   //////////////// FIXED
   //Syntax error: change "Paddle(0,height/2,10,60,10,83,87" to "Paddle(0,height/2,10,60,10,83,87)";
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
 
+  //////////////// FIXED
+  //Syntax error: missing close bracket
+}
 
 // draw()
 //
