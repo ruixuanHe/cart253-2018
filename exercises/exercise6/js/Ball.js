@@ -48,7 +48,10 @@ Ball.prototype.isOffScreen = function () {
   //////////////// FIXED
   //Syntax error: change "iff" to "if";
   //Syntax error: change "++" to "+";
-  if (this.x + this.size < 0 && this.x > width) {
+  //////////////// FIXED
+  //logical error: change "&&" to "||", if using "&&" isOffScreen() will always return false,
+  //because the ball will never go off the right and left screen simultaneously
+  if (this.x + this.size < 0 || this.x > width) {
     return true;
   }
   else {
