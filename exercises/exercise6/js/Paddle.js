@@ -52,6 +52,7 @@ Paddle.prototype.update = function() {
 //////////////// FIXED
 //Syntax error: change "disploy" to "display";
 //Syntax error: change "function())" to "function()";
-Paddle.prototype.disploy = function() {
-  rectangle(this.x,this.y,this.w,this.h);
+//Syntax error: change "rectangle" to "rect";
+Paddle.prototype.display = function() {
+  rect(this.x,this.y,this.w,this.h);
 }
