@@ -25,7 +25,9 @@ function Ball(x,y,vx,vy,size,speed) {
 //Syntax error: change "faction" to "funciton";
 Ball.prototype.updated = function () {
   // Update position with velocity
-  this.x = this.vx;
+  //////////////// FIXED
+  //logical error: replace "=" with "+=","=" will not change the value of x-axis
+  this.x += this.vx;
   this.y += this.vy;
 
   // Constrain y position to be on screen
