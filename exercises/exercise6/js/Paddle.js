@@ -29,12 +29,20 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
 // appropriately
 //////////////// FIXED
 //Syntax error: change "Paddle.proto" to "Paddle.prototype";
+//////////////// FIXED
+//Syntax error: change "keyDown" to "keyIsDown";
+//logical error: upKey and downKey are the properties of the object that calls handleInput function
+//add this. at the front of upKey & downKey
+//logical error: the y velocity should be 0 when users dont pressed any key
 Paddle.prototype.handleInput = function() {
-  if (keyDown(upKey)) {
+  if (keyIsDown(this.upKey)) {
     this.vy = -this.speed;
   }
-  else if (keyDown(downKey)) {
+  else if (keyIsDown(this.downKey)) {
     this.vy = -this.speed;
+  }
+  else {
+    this.vy = 0;
   }
 }
 
