@@ -65,7 +65,11 @@ Ball.prototype.isOffScreen = function () {
 //////////////// FIXED
 //Syntax error: change "this.x this.y" to "this.x,this.y";
 Ball.prototype.display = function () {
-  rect(this.x,this.y);
+  //////////////// FIXED
+  //logical error: we need to fill the ball with a different color (not background color).
+  //logical error: rect() need two variables of its width and height
+  fill(255);
+  rect(this.x,this.y,this.size,this.size);
 }
 
 // handleCollision(paddle)
