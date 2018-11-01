@@ -23,7 +23,8 @@ function Ball(x,y,vx,vy,size,speed) {
 // off left or right side.
 //////////////// FIXED
 //Syntax error: change "faction" to "funciton";
-Ball.prototype.updated = function () {
+//Syntax error: change "updated" to "update";
+Ball.prototype.update = function () {
   // Update position with velocity
   //////////////// FIXED
   //logical error: replace "=" with "+=","=" will not change the value of x-axis
