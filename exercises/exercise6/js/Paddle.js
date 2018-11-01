@@ -61,6 +61,9 @@ Paddle.prototype.update = function() {
 //Syntax error: change "disploy" to "display";
 //Syntax error: change "function())" to "function()";
 //Syntax error: change "rectangle" to "rect";
+//////////////// FIXED
+//logical error: fill the rectangle with a different color (not background color)
 Paddle.prototype.display = function() {
+  fill(255);
   rect(this.x,this.y,this.w,this.h);
 }
