@@ -58,7 +58,10 @@ function draw() {
   leftPaddle.update();
   rightPaddle.update();
 
-  if (ball.isOffTheScreen())
+  //////////////// FIXED
+  //Syntax error: change "isOffTheScreen()" to "isOffScreen()"
+  //Syntax error: missing an open bracket
+  if (ball.isOffScreen()){
     //////////////// FIXED
     //logical error: reset() can be called directly, we need an object to call reset funciton
     ball.reset();
