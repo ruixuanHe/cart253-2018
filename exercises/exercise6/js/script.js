@@ -54,5 +54,7 @@ function draw() {
 
   ball.display();
   leftPaddle.display();
-  rightPaddle.display(;
+  //////////////// FIXED
+  //Syntax error: change "display(" to "display()";
+  rightPaddle.display();
 }
