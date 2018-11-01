@@ -57,8 +57,10 @@ Ball.prototype.isOffScreen = function () {
 // display()
 //
 // Draw the ball as a rectangle on the screen
+//////////////// FIXED
+//Syntax error: change "this.x this.y" to "this.x,this.y";
 Ball.prototype.display = function () {
-  rect(this.x this.y);
+  rect(this.x,this.y);
 }
 
 // handleCollision(paddle)
