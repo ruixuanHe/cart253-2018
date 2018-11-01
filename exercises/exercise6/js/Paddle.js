@@ -58,7 +58,8 @@ Paddle.prototype.update = function() {
   this.y += this.vy;
   //////////////// FIXED
   //Syntax error: change "constraint" to "constrain";
-  this.y = constrain(this.y,0,hight-this.h);
+  //Syntax error: change "hight" to "height";
+  this.y = constrain(this.y,0,height-this.h);
 }
 
 // display()
