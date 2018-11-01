@@ -41,8 +41,10 @@ Paddle.prototype.handleInput = function() {
   if (keyIsDown(this.upKey)) {
     this.vy = -this.speed;
   }
+  //////////////// FIXED
+  //logical error: velocity y should be positive speed, Otherwise it will move at opposite direction;
   else if (keyIsDown(this.downKey)) {
-    this.vy = -this.speed;
+    this.vy = this.speed;
   }
   else {
     this.vy = 0;
