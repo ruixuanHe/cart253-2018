@@ -54,10 +54,24 @@ Paddle.prototype.updateScore = function() {
   if (ball.winningSide == "right" && this.paddleSide == "right") {
     this.score++;
     ball.winningSide = null;
+    ///////// NEW /////////
+    if (this.score >= 11) {
+      gameOver = true;
+      start = false;
+      ball.winningSide = "right";
+    }
+    ///////// END NEW /////////
   }
   if (ball.winningSide == "left" && this.paddleSide == "left") {
     this.score++;
     ball.winningSide = null;
+    ///////// NEW /////////
+    if (this.score >= 11) {
+      gameOver = true;
+      start = false;
+      ball.winningSide = "left";
+    }
+    ///////// END NEW /////////
   }
 }
 // displayScore()
@@ -71,10 +85,10 @@ Paddle.prototype.displayScore = function() {
   textSize(30);
   var gameScore = this.score;
   if (this.paddleSide == "right") {
-    text(gameScore, 0.25 * width, 0.15 * height)
+    text(gameScore, 0.75 * width, 0.15 * height)
   }
   if (this.paddleSide == "left") {
-    text(gameScore, 0.75 * width, 0.15 * height)
+    text(gameScore, 0.25 * width, 0.15 * height)
   }
   pop();
 }

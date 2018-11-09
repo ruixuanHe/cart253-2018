@@ -18,6 +18,8 @@ var rightPaddle;
 var myFontLobster
 var myFontOrbitron
 var start = false;
+var gameOver = false;
+
 ///////// END NEW /////////
 // setup()
 //
@@ -45,12 +47,19 @@ function setup() {
 // draw()
 //
 // check user input and start the game
+// 3 situtations: 1. display title 2. display game 3. display game over message
 function draw() {
-  if (start == false) {
+  ///////// NEW /////////
+  if (start == false && gameOver == false) {
     titleScreen();
-  } else {
+  }
+  if (start == true && gameOver == false) {
     gameStart();
   }
+  if (start == false && gameOver == true) {
+    gameIsOver();
+  }
+  ///////// END NEW /////////
 }
 ///////// NEW /////////
 //titleScreen()
@@ -124,12 +133,49 @@ function gameStart() {
   leftPaddle.displayScore();
   rightPaddle.displayScore();
 }
+//gameIsOver()
+//
+// display the winning side and insturction when the socre go over 11
+function gameIsOver() {
+  background(134, 65, 255);
+  textAlign(CENTER, CENTER);
+  textSize(0.12 * height / 3);
+  textFont(myFontOrbitron);
+  push();
+  textSize(0.5 * height / 3);
+  textFont(myFontLobster);
+  fill(51, 159, 255);
+  text("GAME OVER!!!", width / 2, 1.2 * height / 3);
+  pop();
+  push();
+  fill(77, 171, 255);
+  text(ball.winningSide + " paddle win!!!", width / 2, 1.7 * height / 3);
+  pop();
+  push();
+  fill(179, 219, 255);
+  textSize(0.22 * height / 3);
+  text("Press SPACE to restart the game", width / 2, 2.0 * height / 3);
+  pop();
+}
+//gameIsRestart()
+//
+//reset the ball and paddle object
+function gameIsRestart() {
+  ball = new Ball(width / 2, height / 2, 5, 5, 50, 5);
+  rightPaddle = new Paddle(width - 12, height / 2, 16, 80, 10, DOWN_ARROW, UP_ARROW, "right");
+  leftPaddle = new Paddle(12, height / 2, 16, 80, 10, 83, 87, "left");
+}
 //keyPressed()
 //
-//check user's input, if its "enter" start the game
+//check user's input, if its "enter" start the game. if its "space" restart the game
 function keyPressed() {
   if (keyCode === ENTER) {
     start = true;
+  }
+  if (keyCode === 32) {
+    gameOver = false;
+    start = false;
+    gameIsRestart();
   }
 }
 ///////// END NEW /////////

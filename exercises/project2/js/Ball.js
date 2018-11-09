@@ -48,12 +48,12 @@ Ball.prototype.update = function() {
 Ball.prototype.isOffScreen = function() {
   // Check for going off the left side of creen and reset if so
   if (this.x + this.size / 2 < 0) {
-    this.winningSide = "left";
+    this.winningSide = "right";
     return true;
   }
   /// Check for going off the right side of creen and reset if so
   else if (this.x - this.size / 2 > width) {
-    this.winningSide = "right";
+    this.winningSide = "left";
     return true;
   } else {
     return false;
