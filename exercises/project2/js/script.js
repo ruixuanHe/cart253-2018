@@ -21,6 +21,7 @@ var start = false;
 var gameOver = false;
 
 var deadstartImage;
+var wormholeSwitch;
 ///////// END NEW /////////
 ///////// NEW /////////
 // preload()
@@ -28,6 +29,8 @@ var deadstartImage;
 // perload images and sounds
 function preload() {
   deadstartImage = loadImage('assets/images/deadstart.png');
+  wormHole1Image = loadImage('assets/images/wormhole1.png');
+  wormHole2Image = loadImage('assets/images/wormhole2.png');
 }
 ///////// END NEW /////////
 // setup()
@@ -47,6 +50,11 @@ function setup() {
   ///////// NEW /////////
   //create a badball
   badball = new Badball(width / 3, height / 3, 50, 15);
+  ///////// END NEW /////////
+  ///////// NEW /////////
+  //create two wormhole
+  wormHole1 = new Wormhole(width / 4, height / 4, 60, 5);
+  wormHole2 = new Wormhole(3 * width / 4, 3 * height / 4, 60, -5);
   ///////// END NEW /////////
   // Create a ball
   ball = new Ball(width / 2, height / 2, 5, 5, 50, 5);
@@ -138,6 +146,16 @@ function gameStart() {
   badball.handleCollision(leftPaddle);
   badball.handleCollision(rightPaddle);
   badball.display(deadstartImage);
+  ///////// END NEW /////////
+  ///////// NEW /////////
+  wormHole1.displayWormhole(wormHole1Image);
+  wormHole2.displayWormhole(wormHole2Image);
+  wormHole1.updatePosition();
+  wormHole2.updatePosition();
+  wormHole1.warmp();
+  wormHole2.warmp();
+  wormHole1.overlap();
+  wormHole2.transmitte();
   ///////// END NEW /////////
   ball.display();
   leftPaddle.display();
