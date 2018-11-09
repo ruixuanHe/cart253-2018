@@ -93,6 +93,11 @@ Paddle.prototype.displayScore = function() {
   pop();
 }
 ///////// END NEW /////////
+///////// NEW /////////
+Paddle.prototype.slower = function() {
+  this.speed -= 5;
+}
+///////// END NEW /////////
 // display()
 //
 // Draw the paddle as a rectangle on the screen

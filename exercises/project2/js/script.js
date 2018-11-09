@@ -20,6 +20,15 @@ var myFontOrbitron
 var start = false;
 var gameOver = false;
 
+var deadstartImage;
+///////// END NEW /////////
+///////// NEW /////////
+// preload()
+//
+// perload images and sounds
+function preload() {
+  deadstartImage = loadImage('assets/images/deadstart.png');
+}
 ///////// END NEW /////////
 // setup()
 //
@@ -34,6 +43,10 @@ function setup() {
   rectMode(CENTER);
   noStroke();
   imageMode(CENTER);
+  ///////// END NEW /////////
+  ///////// NEW /////////
+  //create a badball
+  badball = new Badball(width / 3, height / 3, 50, 15);
   ///////// END NEW /////////
   // Create a ball
   ball = new Ball(width / 2, height / 2, 5, 5, 50, 5);
@@ -120,6 +133,12 @@ function gameStart() {
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
+  ///////// NEW /////////
+  badball.update();
+  badball.handleCollision(leftPaddle);
+  badball.handleCollision(rightPaddle);
+  badball.display(deadstartImage);
+  ///////// END NEW /////////
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
