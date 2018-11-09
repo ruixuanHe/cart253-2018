@@ -22,6 +22,7 @@ var gameOver = false;
 
 var deadstartImage;
 var wormholeSwitch;
+var starLight = [];
 ///////// END NEW /////////
 ///////// NEW /////////
 // preload()
@@ -157,6 +158,10 @@ function gameStart() {
   wormHole1.overlap();
   wormHole2.transmitte();
   ///////// END NEW /////////
+  ///////// NEW /////////
+  createStarLight();
+  displayStarLight();
+  ///////// END NEW /////////
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
@@ -215,4 +220,24 @@ function keyPressed() {
     gameIsRestart();
   }
 }
+
+//displayStarLight()
+//
+//display start light array on screen
+function displayStarLight() {
+  for (var i = 0; i < 150; i++) {
+    starLight[i].update();
+    starLight[i].display();
+  }
+}
+
+//createStarLight()
+//
+//push 150 different start light into the starLight array
+function createStarLight() {
+  for (var i = 0; i < 150; i++) {
+    starLight.push(new StarLight(random(0, width), random(0, height), random(-0.5, 0.5), random(-0.5, 0.5), random(1, 3), 5));
+  }
+}
+
 ///////// END NEW /////////
