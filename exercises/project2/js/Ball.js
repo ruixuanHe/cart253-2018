@@ -34,8 +34,14 @@ Ball.prototype.update = function() {
   this.y = constrain(this.y, 0, height);
 
   // Check for touching upper or lower edge and reverse velocity if so
-  if (this.y - this.size / 2 < 0) this.vy = -this.vy;
-  if (this.y + this.size / 2 > height) this.vy = -this.vy;
+  if (this.y - this.size / 2 < 0) {
+    this.vy = -this.vy;
+    pinaoSound2.play();
+  }
+  if (this.y + this.size / 2 > height) {
+    this.vy = -this.vy;
+    pinaoSound3.play();
+  }
 }
 
 // isOffScreen()
@@ -49,11 +55,13 @@ Ball.prototype.isOffScreen = function() {
   // Check for going off the left side of creen and reset if so
   if (this.x + this.size / 2 < 0) {
     this.winningSide = "right";
+    drumSound2.play();
     return true;
   }
   /// Check for going off the right side of creen and reset if so
   else if (this.x - this.size / 2 > width) {
     this.winningSide = "left";
+    drumSound2.play();
     return true;
   } else {
     return false;
@@ -65,9 +73,8 @@ Ball.prototype.isOffScreen = function() {
 // display()
 //
 // Draw the ball as a rectangle on the screen
-Ball.prototype.display = function() {
-  fill(255);
-  rect(this.x, this.y, this.size, this.size);
+Ball.prototype.display = function(ballImage) {
+  image(ballImage, this.x, this.y, this.size, this.size);
 }
 
 // handleCollision(paddle)
@@ -84,6 +91,7 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y -= this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      pinaoSound1.play();
     }
   }
 }

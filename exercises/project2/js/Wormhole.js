@@ -59,6 +59,7 @@ Wormhole.prototype.transmitte = function() {
     ball.y = this.y;
     ball.vx = -ball.vx;
     ball.vy = -ball.vy;
+    pinaoSound4.play();
     wormholeSwitch = false;
   }
 }

@@ -20,6 +20,17 @@ var myFontOrbitron
 var start = false;
 var gameOver = false;
 
+var pinaoSound1;
+var pinaoSound2;
+var pinaoSound3;
+var pinaoSound4;
+var pinaoSound5;
+var drumSound1;
+var drumSound2;
+var backgroundMusic;
+var backgroundImage;
+var ballImage;
+var ballImage2;
 var deadstartImage;
 var wormholeSwitch;
 var starLight = [];
@@ -29,6 +40,17 @@ var starLight = [];
 //
 // perload images and sounds
 function preload() {
+  backgroundMusic = new Audio("assets/sounds/backgroundMusic.mp3");
+  drumSound1 = new Audio("assets/sounds/small_drum1.mp3");
+  drumSound2 = new Audio("assets/sounds/Japanese_drum1.mp3");
+  pinaoSound1 = new Audio("assets/sounds/pianoA.mp3");
+  pinaoSound2 = new Audio("assets/sounds/pianoB.mp3");
+  pinaoSound3 = new Audio("assets/sounds/pianoC.mp3");
+  pinaoSound4 = new Audio("assets/sounds/pianoD.mp3");
+  pinaoSound5 = new Audio("assets/sounds/pianoE.mp3");
+  backgroundImage = loadImage('assets/images/background.jpg');
+  ballImage = loadImage('assets/images/UFO.png');
+  ballImage2 = loadImage('assets/images/UFO2.png');
   deadstartImage = loadImage('assets/images/deadstart.png');
   wormHole1Image = loadImage('assets/images/wormhole1.png');
   wormHole2Image = loadImage('assets/images/wormhole2.png');
@@ -51,6 +73,8 @@ function setup() {
   ///////// NEW /////////
   //create a badball
   badball = new Badball(width / 3, height / 3, 50, 15);
+  titleWormhole1 = new Wormhole(width / 2, height / 15, 70, -4);
+  titleWormhole2 = new Wormhole(width / 2, 3 * height / 4, 70, 6);
   ///////// END NEW /////////
   ///////// NEW /////////
   //create two wormhole
@@ -58,7 +82,7 @@ function setup() {
   wormHole2 = new Wormhole(3 * width / 4, 3 * height / 4, 60, -5);
   ///////// END NEW /////////
   // Create a ball
-  ball = new Ball(width / 2, height / 2, 5, 5, 50, 5);
+  ball = new Ball(width / 2, height / 2, 5, 5, 70, 5);
   // Create the right paddle with UP and DOWN as controls
   rightPaddle = new Paddle(width - 12, height / 2, 16, 80, 10, DOWN_ARROW, UP_ARROW, "right");
   // Create the left paddle with W and S as controls
@@ -88,6 +112,7 @@ function draw() {
 //
 //a title screen display game name and insturction
 function titleScreen() {
+  backgroundMusic.play();
   // set up style
   background(134, 65, 255);
   textAlign(CENTER, CENTER);
@@ -120,13 +145,19 @@ function titleScreen() {
   textSize(0.3 * height / 3);
   text("Press Enter to start the game", width / 2, 2.1 * height / 3);
   pop();
+  titleWormhole1.displayWormhole(ballImage2);
+  titleWormhole2.displayWormhole(ballImage2);
+  titleWormhole1.updatePosition();
+  titleWormhole2.updatePosition();
+  titleWormhole1.warmp();
+  titleWormhole2.warmp();
 }
 //gameStart()
 //
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function gameStart() {
-  background(0);
+  image(backgroundImage, width / 2, height / 2, width, height);
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -162,7 +193,7 @@ function gameStart() {
   createStarLight();
   displayStarLight();
   ///////// END NEW /////////
-  ball.display();
+  ball.display(ballImage);
   leftPaddle.display();
   rightPaddle.display();
   //call updateScore() method

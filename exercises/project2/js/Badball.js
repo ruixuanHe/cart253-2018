@@ -61,6 +61,7 @@ Badball.prototype.handleCollision = function(paddle) {
       paddle.slower();
       this.reset();
       console.log(paddle.speed);
+      pinaoSound5.play();
     }
   }
 }
