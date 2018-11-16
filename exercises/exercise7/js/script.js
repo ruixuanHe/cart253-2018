@@ -7,6 +7,8 @@ var fasterBulletSwitch = false;
 var biggerBulletSwitch = false;
 //array of ColorBlock
 var colorBlock = [];
+//array of Enemy
+var enemy = [];
 // setup()
 //
 // Set up the canvas, position the images, set the image mode.
@@ -17,6 +19,7 @@ function setup() {
   angleMode(DEGREES);
   fighter = new Fighter(width / 2, height / 2, 50, 50);
   supplyCarte = new SupplyCarte();
+  createEnemy();
 }
 
 // draw() method
@@ -30,9 +33,17 @@ function draw() {
     colorBlock[i].update();
     colorBlock[i].display();
   }
+  for (var i = 0; i < enemy.length; i++) {
+    enemy[i].update();
+    enemy[i].display();
+    console.log(bullet.length);
+  }
   for (var i = 0; i < bullet.length; i++) {
     bullet[i].display();
     bullet[i].update();
+    for (var j = 0; j < enemy.length; j++) {
+      bullet[i].handleCollision(enemy[j]);
+    }
     if (bounceBulletSwitch == true) {
       bullet[i].bounceBullet();
     }
@@ -65,5 +76,15 @@ function keyPressed() {
 function createColorBlock() {
   for (var i = 0; i < 1; i++) {
     colorBlock.push(new ColorBlock());
+  }
+}
+
+//createEnemy()
+//
+//create five enemies
+function createEnemy() {
+  for (var i = 0, j = 50; i < 5; i++) {
+    enemy.push(new Enemy(j, 30, 50));
+    j = j + 130;
   }
 }

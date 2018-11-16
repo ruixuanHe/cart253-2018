@@ -38,6 +38,14 @@ Bullet.prototype.display = function() {
   ellipse(this.x, this.y, this.size, this.size);
 }
 
+//handleCollision()
+//
+//check if the bullet overlap the enemy
+Bullet.prototype.handleCollision = function(enemy) {
+  if (dist(enemy.x, enemy.y, this.x, this.y) < (this.size + enemy.size)) {
+    enemy.collisonSwitch = true;
+  }
+}
 //bounceBullet()
 //
 //reverse bullet's angle when it touch the upper and bottom screen
