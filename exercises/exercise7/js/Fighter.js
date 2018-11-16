@@ -16,6 +16,7 @@ function Fighter(x, y, w, h) {
   this.vx = 0;
   this.vy = 0;
   this.trigger = false;
+  this.color = '#ffffff';
 }
 
 // update()
@@ -51,18 +52,18 @@ Fighter.prototype.handleInput = function() {
 // display fighter on screen
 Fighter.prototype.display = function() {
   push();
+  fill(this.color);
   translate(this.x, this.y);
   rotate(this.angle);
   rect(0, 0, this.w, this.h);
   translate(this.w / 2, 0);
-  fill(255, 255, 255);
   rect(0, 0, this.w, this.h * 0.2);
   pop();
 }
 
 //keyPressed()
 //
-//check user's input 
+//check user's input
 Fighter.prototype.keyPressed = function() {
   if (keyCode === 32) {
     bullet.push(new Bullet(this.x, this.y, this.angle));
