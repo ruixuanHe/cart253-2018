@@ -1,3 +1,12 @@
+/*============description==================
+the idea is about a fighter pass through time and shot the enemy
+1.I want to use simailar background which made by color block in my final project
+2.fighter's operating sysment spend me a lot of time, I will implement it in final project
+3.the collison handle of bullet doesnot work well, but the code is correct.
+need to spend more time on the visual modification.
+4.the idea of supplyCarte is interesting, case different effect on fighter. This will increase
+user interaction
+*/
 //array of bullter
 var bullet = [];
 
