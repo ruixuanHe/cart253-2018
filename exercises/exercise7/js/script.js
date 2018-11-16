@@ -5,6 +5,8 @@ var bullet = [];
 var bounceBulletSwitch = false;
 var fasterBulletSwitch = false;
 var biggerBulletSwitch = false;
+//array of ColorBlock
+var colorBlock = [];
 // setup()
 //
 // Set up the canvas, position the images, set the image mode.
@@ -22,6 +24,12 @@ function setup() {
 // Moves the clown face toward the current mouse location
 function draw() {
   background(0, 0, 0);
+  createColorBlock();
+
+  for (var i = 0; i < colorBlock.length; i++) {
+    colorBlock[i].update();
+    colorBlock[i].display();
+  }
   for (var i = 0; i < bullet.length; i++) {
     bullet[i].display();
     bullet[i].update();
@@ -49,4 +57,13 @@ function draw() {
 // check user's input
 function keyPressed() {
   fighter.keyPressed();
+}
+
+//createColorBlock()
+//
+//create color blocks for background
+function createColorBlock() {
+  for (var i = 0; i < 1; i++) {
+    colorBlock.push(new ColorBlock());
+  }
 }

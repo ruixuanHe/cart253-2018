@@ -15,7 +15,7 @@ function SupplyCarte() {
   this.vy = 1;
   this.height = 0;
   this.type = int(random(1, 4));
-  this.color = '#75a3a3';
+  this.color = '';
 }
 
 // update()
