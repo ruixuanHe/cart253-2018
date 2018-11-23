@@ -33,7 +33,7 @@ function Enemy() {
   }*/
   this.location = createVector(random(0, width), random(0, height));
   this.velocity = createVector(random(-height / 16, height / 16), random(-height / 16, height / 16));
-  this.velocity.mult(0.5);
+  this.velocity.mult(0.08);
   this.crushSwitch = false;
   this.size = 25;
   this.angle = 0;
@@ -48,7 +48,7 @@ function Enemy() {
 // update enemy's position
 Enemy.prototype.update = function() {
   this.location.add(this.velocity);
-  this.velocity.mult(0.92);
+  this.velocity.mult(0.99);
   if (this.location.x - this.size / 2 > width) {
     this.location.x -= width;
   }
@@ -90,10 +90,10 @@ Enemy.prototype.crush = function() {
     push();
     translate(this.crushX, this.crushY);
     rotate(this.angle);
-    fill(random(80, 255), 100, 100, this.crushOpacity);
+    fill(255, 117, random(2,30), this.crushOpacity);
     ellipse(0, this.crushShift, 40, 40);
     pop();
-    this.crushShift += 1;
-    this.crushOpacity -= 1;
+    this.crushShift += 0.013;
+    this.crushOpacity -= 0.04;
   }
 }
