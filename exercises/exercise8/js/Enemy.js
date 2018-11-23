@@ -39,6 +39,8 @@ function Enemy() {
   this.angle = 0;
   this.crushX;
   this.crushY;
+  this.crushShift = 0;
+  this.crushOpacity = 255;
 }
 
 // update()
@@ -47,6 +49,18 @@ function Enemy() {
 Enemy.prototype.update = function() {
   this.location.add(this.velocity);
   this.velocity.mult(0.92);
+  if (this.location.x - this.size / 2 > width) {
+    this.location.x -= width;
+  }
+  if (this.location.x + this.size / 2 < 0) {
+    this.location.x += width;
+  }
+  if (this.location.y + this.size / 2 < 0) {
+    this.location.y += height;
+  }
+  if (this.location.y - this.size / 2 > height) {
+    this.location.y -= height;
+  }
 }
 
 // display()
@@ -63,5 +77,23 @@ Enemy.prototype.display = function() {
     pop();
     this.crushX = this.location.x;
     this.crushY = this.location.y;
+  } else {
+    this.crush();
+  }
+}
+
+//crush()
+//
+//when bullet hit enemy it will crush
+Enemy.prototype.crush = function() {
+  for (this.angle = 0; this.angle < 360; this.angle += 45) {
+    push();
+    translate(this.crushX, this.crushY);
+    rotate(this.angle);
+    fill(random(80, 255), 100, 100, this.crushOpacity);
+    ellipse(0, this.crushShift, 40, 40);
+    pop();
+    this.crushShift += 1;
+    this.crushOpacity -= 1;
   }
 }
