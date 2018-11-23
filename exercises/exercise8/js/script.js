@@ -3,6 +3,12 @@
 exercise8
 Ruixuan He 40000330
 
+I create a new kind of shooting game at this time, the effects of bullet, enemy and gun will be used in the final project   
+1. this prototype is also about the shooting, last time I use key contorl and this time is about mouse contorl
+2. use p5.vector to create a new bullet object, it will have better performance
+3. the bullet becomes more smooth and will gradually disappear
+4. the enemy will has a explosion effect
+5. the prototype using too many space, so program becomes pretty slow after 20s. need to fix this problem in final project
 ******************/
 
 var gun
