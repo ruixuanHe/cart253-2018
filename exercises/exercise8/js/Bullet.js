@@ -69,3 +69,9 @@ Bullet.prototype.screenWramp = function() {
     this.velocity.y *= -1.0;
   }
 }
+
+Bullet.prototype.handleCollision = function(enemy) {
+  if (dist(enemy.location.x, enemy.location.y, this.location.x, this.location.y) < (this.size / 2 + enemy.size / 2)) {
+    enemy.crushSwitch = true;
+  }
+}
