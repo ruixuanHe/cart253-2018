@@ -16,6 +16,7 @@ function Bullet(x, y, angle) {
   this.initialForce = createVector(cos(this.angle), sin(this.angle));
   this.initialForce.mult(random(height / 8, height / 4));
   this.opacity = 255;
+  this.alive = true;
 }
 
 // update()
@@ -24,13 +25,14 @@ function Bullet(x, y, angle) {
 Bullet.prototype.update = function() {
   this.initialForce.mult(0.2);
   this.acceleration.add(this.initialForce);
-  console.log(this.angle);
+  //console.log(this.angle);
   this.velocity.add(this.acceleration);
   this.velocity.mult(0.92);
   this.location.add(this.velocity);
   this.acceleration.mult(0);
   if (this.velocity.x < 0.5 && this.velocity.y < 0.5) {
     this.opacity -= 5;
+    if(this.opacity <= 0) this.alive = false;
   }
 }
 
