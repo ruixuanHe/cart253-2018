@@ -23,11 +23,11 @@ function Bullet(x, y, angle, bulletSide) {
   this.crushSwitch = false;
   this.harmful = true;
 
-  this.explosion1 = new Explosion(this.x,this.y,random(1,360));
-  this.explosion2 = new Explosion(this.x,this.y,random(1,360));
-  this.explosion3 = new Explosion(this.x,this.y,random(1,360));
-  this.explosion4 = new Explosion(this.x,this.y,random(1,360));
-  this.explosion5 = new Explosion(this.x,this.y,random(1,360));
+  this.explosion1 = new Explosion(this.x, this.y, random(1, 360));
+  this.explosion2 = new Explosion(this.x, this.y, random(1, 360));
+  this.explosion3 = new Explosion(this.x, this.y, random(1, 360));
+  this.explosion4 = new Explosion(this.x, this.y, random(1, 360));
+  this.explosion5 = new Explosion(this.x, this.y, random(1, 360));
 }
 
 // update()
@@ -40,7 +40,7 @@ Bullet.prototype.update = function() {
   this.y += this.vy;
   //time and if statement is using for better animation of bullet
   this.velocity *= 0.998;
-  if (this.velocity < 0.5 ) {
+  if (this.velocity < 0.5) {
     this.opacity -= 5;
     if (this.opacity <= 0) this.alive = false;
   }
@@ -111,8 +111,14 @@ Bullet.prototype.handleCollision = function(enemy) {
       }
     }
   }
-  if (dist(enemy.x, enemy.y, this.x, this.y) < (this.size / 2 + enemy.size / 2)) {
-    enemy.crushSwitch = true;
+  if (enemy.constructor.name === "Shooter") {
+    if (enemy.crushSwitch === false) {
+      if (dist(enemy.x, enemy.y, this.x, this.y) < (this.size / 2 + enemy.size / 2)) {
+        enemy.collisonSwitch = true;
+        this.crushSwitch = true;
+        this.harmful = false;
+      }
+    }
   }
 }
 
@@ -120,16 +126,16 @@ Bullet.prototype.handleCollision = function(enemy) {
 //
 //when bullet hit enemy it will crush
 Bullet.prototype.crush = function() {
-this.explosion1.update();
-this.explosion1.display();
-this.explosion2.update();
-this.explosion2.display();
-this.explosion3.update();
-this.explosion3.display();
-this.explosion4.update();
-this.explosion4.display();
-this.explosion5.update();
-this.explosion5.display();
-if(this.explosion5.alive == false)
-this.alive == false;
+  this.explosion1.update();
+  this.explosion1.display();
+  this.explosion2.update();
+  this.explosion2.display();
+  this.explosion3.update();
+  this.explosion3.display();
+  this.explosion4.update();
+  this.explosion4.display();
+  this.explosion5.update();
+  this.explosion5.display();
+  if (this.explosion5.alive == false)
+    this.alive == false;
 }

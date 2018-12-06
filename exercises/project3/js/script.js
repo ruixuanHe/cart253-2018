@@ -6,6 +6,7 @@ Ruixuan He 40000330
 ******************/
 var bulletRed = [];
 var bulletBlue = [];
+var gameOverSwitch = false;
 // setup()
 //
 // setup the canvas
@@ -58,8 +59,8 @@ function draw() {
   shooterRed.update();
   shooterBlue.display();
   shooterRed.display();
-  console.log(bulletRed.length);
-  console.log(bulletBlue.length);
+  shooterRed.displayHealth();
+  shooterBlue.displayHealth();
 }
 
 // keyPressed()

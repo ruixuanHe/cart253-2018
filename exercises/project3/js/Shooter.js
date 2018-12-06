@@ -27,6 +27,10 @@ function Shooter(downKey, upKey, leftKey, rightKey, shooterSide) {
   this.crushOpacity = 255;
   this.crushSwitch = false;
   this.crushSize = 40;
+  //for health bar
+  this.healthBarX;
+  this.healthBarY;
+  this.collisonSwitch = false;
 }
 
 //setup()
@@ -40,6 +44,8 @@ Shooter.prototype.setup = function() {
     this.color4 = color('#3C110D');
     this.x = width / 4;
     this.y = height / 2;
+    this.healthBarX = 30;
+    this.healthBarY = 20;
   }
   if (this.shooterSide === "blue") {
     this.color1 = color('#3F4FFF');
@@ -49,6 +55,8 @@ Shooter.prototype.setup = function() {
     this.x = 3 * width / 4;
     this.y = height / 2;
     this.angle += 180;
+    this.healthBarX = width - 30;
+    this.healthBarY = 20;
   }
 }
 
@@ -74,6 +82,13 @@ Shooter.prototype.update = function() {
   }
   this.x = constrain(this.x, 0 + this.size / 2, width - this.size / 2);
   this.y = constrain(this.y, 0 + this.size / 2, height - this.size / 2);
+  if (this.collisonSwitch === true) {
+    this.score -= 1;
+    this.collisonSwitch = false;
+  }
+  if (this.score < 1) {
+    this.crushSwitch = true;
+  }
 }
 
 // display()
@@ -108,14 +123,16 @@ Shooter.prototype.display = function() {
 //
 //check user's input
 Shooter.prototype.keyPressed = function() {
-  if (this.shooterSide === "red") {
-    if (keyCode === 32) {
-      bulletRed.push(new Bullet(this.x, this.y, this.angle, "red"));
+  if (this.crushSwitch === false) {
+    if (this.shooterSide === "red") {
+      if (keyCode === 32) {
+        bulletRed.push(new Bullet(this.x, this.y, this.angle, "red"));
+      }
     }
-  }
-  if (this.shooterSide === "blue") {
-    if (keyCode === 13) {
-      bulletBlue.push(new Bullet(this.x, this.y, this.angle, "blue"));
+    if (this.shooterSide === "blue") {
+      if (keyCode === 13) {
+        bulletBlue.push(new Bullet(this.x, this.y, this.angle, "blue"));
+      }
     }
   }
 }
@@ -129,10 +146,37 @@ Shooter.prototype.crush = function() {
     translate(this.crushX, this.crushY);
     rotate(this.crushAngle);
     fill(255, 50, random(0, 255), this.crushOpacity);
-    ellipse(0, this.crushShift, this.crushSize,this.crushSize);
+    ellipse(0, this.crushShift, this.crushSize, this.crushSize);
     pop();
     this.crushShift += 0.03;
     this.crushOpacity -= 0.12;
     this.crushSize += 0.01;
+  }
+  if (this.crushOpacity <= 50) {
+    gameOverSwitch = true;
+  }
+}
+
+//displayHealth()
+//
+//display shooter's health
+Shooter.prototype.displayHealth = function() {
+  if (this.shooterSide === "red") {
+    for (var i = 0; i < this.score * 55; i += 55) {
+      push();
+      fill(116, 221, 87);
+      translate(this.healthBarX + i, this.healthBarY);
+      rect(0, 0, 50, 30);
+      pop();
+    }
+  }
+  if (this.shooterSide === "blue") {
+    for (var i = 0; i < this.score * 55; i += 55) {
+      push();
+      fill(116, 221, 87);
+      translate(this.healthBarX - i, this.healthBarY);
+      rect(0, 0, 50, 30);
+      pop();
+    }
   }
 }
