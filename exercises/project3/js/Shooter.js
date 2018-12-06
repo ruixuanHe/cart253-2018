@@ -4,7 +4,7 @@
 function Shooter(downKey, upKey, leftKey, rightKey, shooterSide) {
   this.x;
   this.y;
-  this.velocity = 5;
+  this.velocity = 4;
   this.angle = 0;
   this.vx = 0;
   this.vy = 0;
@@ -88,4 +88,20 @@ Shooter.prototype.display = function() {
   fill(this.color4);
   rect(0, 5 * this.size / 16, this.size / 4, this.size / 4);
   pop();
+}
+
+//keyPressed()
+//
+//check user's input
+Shooter.prototype.keyPressed = function() {
+  if (this.shooterSide === "red") {
+    if (keyCode === 32) {
+      bulletRed.push(new Bullet(this.x, this.y, this.angle, "red"));
+    }
+  }
+  if (this.shooterSide === "blue") {
+    if (keyCode === 13) {
+      bulletBlue.push(new Bullet(this.x, this.y, this.angle, "blue"));
+    }
+  }
 }
