@@ -19,6 +19,13 @@ function Shooter(downKey, upKey, leftKey, rightKey, shooterSide) {
   this.leftKey = leftKey;
   this.rightKey = rightKey;
   this.shooterSide = shooterSide;
+  //for crushing
+  this.crushAngle = 0;
+  this.crushX;
+  this.crushY;
+  this.crushShift = 0;
+  this.crushOpacity = 255;
+  this.crushSwitch = false;
 }
 
 //setup()
@@ -72,22 +79,28 @@ Shooter.prototype.update = function() {
 //
 // display shooter on screen
 Shooter.prototype.display = function() {
-  push();
-  translate(this.x, this.y);
-  //stroke(116, 127, 124);
-  fill(this.color1);
-  ellipse(0, 0, this.size + 10, this.size + 10);
-  fill(this.color2);
-  ellipse(0, 0, this.size, this.size);
-  pop();
-  push();
-  translate(this.x, this.y);
-  rotate(this.angle - 90);
-  fill(this.color3);
-  rect(0, 0, this.size / 4, this.size / 2);
-  fill(this.color4);
-  rect(0, 5 * this.size / 16, this.size / 4, this.size / 4);
-  pop();
+  if (this.crushSwitch == false) {
+    push();
+    translate(this.x, this.y);
+    //stroke(116, 127, 124);
+    fill(this.color1);
+    ellipse(0, 0, this.size + 10, this.size + 10);
+    fill(this.color2);
+    ellipse(0, 0, this.size, this.size);
+    pop();
+    push();
+    translate(this.x, this.y);
+    rotate(this.angle - 90);
+    fill(this.color3);
+    rect(0, 0, this.size / 4, this.size / 2);
+    fill(this.color4);
+    rect(0, 5 * this.size / 16, this.size / 4, this.size / 4);
+    pop();
+    this.crushX = this.x;
+    this.crushY = this.y;
+  } else {
+    this.crush();
+  }
 }
 
 //keyPressed()
@@ -103,5 +116,21 @@ Shooter.prototype.keyPressed = function() {
     if (keyCode === 13) {
       bulletBlue.push(new Bullet(this.x, this.y, this.angle, "blue"));
     }
+  }
+}
+
+//crush()
+//
+//when bullet hit enemy it will crush
+Shooter.prototype.crush = function() {
+  for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 45) {
+    push();
+    translate(this.crushX, this.crushY);
+    rotate(this.crushAngle);
+    fill(255, 117, random(0, 255), this.crushOpacity);
+    ellipse(0, this.crushShift, 40, 40);
+    pop();
+    this.crushShift += 0.013;
+    this.crushOpacity -= 0.04;
   }
 }

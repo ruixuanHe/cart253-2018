@@ -28,16 +28,28 @@ function setup() {
 // draw the canvas
 function draw() {
   background('#000000');
-  for (var i = 0; i < bulletRed.length; i++) {
+  for (var i = bulletRed.length - 1; i >= 0; i--) {
     bulletRed[i].display();
     bulletRed[i].update();
+    if (bulletRed[i].harmful === true) {
+      bulletRed[i].handleCollision(shooterBlue);
+      for (var j = bulletBlue.length - 1; j >= 0; j--) {
+        bulletRed[i].handleCollision(bulletBlue[j]);
+      }
+    }
     if (bulletRed[i].alive === false) {
       bulletRed.splice(i, 1);
     }
   }
-  for (var i = 0; i < bulletBlue.length; i++) {
+  for (var i = bulletBlue.length - 1; i >= 0; i--) {
     bulletBlue[i].display();
     bulletBlue[i].update();
+    if (bulletBlue[i].harmful === true) {
+      bulletBlue[i].handleCollision(shooterRed);
+      for (var j = bulletRed.length - 1; j >= 0; j--) {
+        bulletBlue[i].handleCollision(bulletRed[j]);
+      }
+    }
     if (bulletBlue[i].alive === false) {
       bulletBlue.splice(i, 1);
     }
@@ -46,6 +58,8 @@ function draw() {
   shooterRed.update();
   shooterBlue.display();
   shooterRed.display();
+  console.log(bulletRed.length);
+  console.log(bulletBlue.length);
 }
 
 // keyPressed()
