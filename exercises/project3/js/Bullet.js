@@ -18,15 +18,16 @@ function Bullet(x, y, angle, bulletSide) {
   this.bulletSide = bulletSide;
 
   //for crushing
-  this.crushAngle = 0;
   this.crushX;
   this.crushY;
-  this.crushShift = 0;
-  this.crushOpacity = 255;
   this.crushSwitch = false;
   this.harmful = true;
 
-
+  this.explosion1 = new Explosion(this.x,this.y,random(1,360));
+  this.explosion2 = new Explosion(this.x,this.y,random(1,360));
+  this.explosion3 = new Explosion(this.x,this.y,random(1,360));
+  this.explosion4 = new Explosion(this.x,this.y,random(1,360));
+  this.explosion5 = new Explosion(this.x,this.y,random(1,360));
 }
 
 // update()
@@ -39,7 +40,7 @@ Bullet.prototype.update = function() {
   this.y += this.vy;
   //time and if statement is using for better animation of bullet
   this.velocity *= 0.998;
-  if (this.velocity < 0.5 && this.velocity < 0.5) {
+  if (this.velocity < 0.5 ) {
     this.opacity -= 5;
     if (this.opacity <= 0) this.alive = false;
   }
@@ -61,6 +62,16 @@ Bullet.prototype.display = function() {
       pop();
       this.crushX = this.x;
       this.crushY = this.y;
+      this.explosion1.x = this.crushX;
+      this.explosion1.y = this.crushY;
+      this.explosion2.x = this.crushX;
+      this.explosion2.y = this.crushY;
+      this.explosion3.x = this.crushX;
+      this.explosion3.y = this.crushY;
+      this.explosion4.x = this.crushX;
+      this.explosion4.y = this.crushY;
+      this.explosion5.x = this.crushX;
+      this.explosion5.y = this.crushY;
     }
     if (this.bulletSide === "blue") {
       push();
@@ -73,6 +84,16 @@ Bullet.prototype.display = function() {
       pop();
       this.crushX = this.x;
       this.crushY = this.y;
+      this.explosion1.x = this.crushX;
+      this.explosion1.y = this.crushY;
+      this.explosion2.x = this.crushX;
+      this.explosion2.y = this.crushY;
+      this.explosion3.x = this.crushX;
+      this.explosion3.y = this.crushY;
+      this.explosion4.x = this.crushX;
+      this.explosion4.y = this.crushY;
+      this.explosion5.x = this.crushX;
+      this.explosion5.y = this.crushY;
     }
   } else {
     this.crush();
@@ -99,17 +120,16 @@ Bullet.prototype.handleCollision = function(enemy) {
 //
 //when bullet hit enemy it will crush
 Bullet.prototype.crush = function() {
-  for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 45) {
-    push();
-    translate(this.crushX, this.crushY);
-    rotate(this.crushAngle);
-    fill(255, random(0, 255), 117, this.crushOpacity);
-    ellipse(0, this.crushShift, 40, 40);
-    pop();
-    this.crushShift += 0.013;
-    this.crushOpacity -= 0.04;
-  }
-  if (this.crushOpacity <= 5) {
-    this.alive = false;
-  }
+this.explosion1.update();
+this.explosion1.display();
+this.explosion2.update();
+this.explosion2.display();
+this.explosion3.update();
+this.explosion3.display();
+this.explosion4.update();
+this.explosion4.display();
+this.explosion5.update();
+this.explosion5.display();
+if(this.explosion5.alive == false)
+this.alive == false;
 }

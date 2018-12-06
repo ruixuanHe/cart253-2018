@@ -26,6 +26,7 @@ function Shooter(downKey, upKey, leftKey, rightKey, shooterSide) {
   this.crushShift = 0;
   this.crushOpacity = 255;
   this.crushSwitch = false;
+  this.crushSize = 40;
 }
 
 //setup()
@@ -123,14 +124,15 @@ Shooter.prototype.keyPressed = function() {
 //
 //when bullet hit enemy it will crush
 Shooter.prototype.crush = function() {
-  for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 45) {
+  for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 30) {
     push();
     translate(this.crushX, this.crushY);
     rotate(this.crushAngle);
-    fill(255, 117, random(0, 255), this.crushOpacity);
-    ellipse(0, this.crushShift, 40, 40);
+    fill(255, 50, random(0, 255), this.crushOpacity);
+    ellipse(0, this.crushShift, this.crushSize,this.crushSize);
     pop();
-    this.crushShift += 0.013;
-    this.crushOpacity -= 0.04;
+    this.crushShift += 0.03;
+    this.crushOpacity -= 0.12;
+    this.crushSize += 0.01;
   }
 }
