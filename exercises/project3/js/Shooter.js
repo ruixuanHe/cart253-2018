@@ -174,6 +174,9 @@ Shooter.prototype.crush = function() {
   }
   if (this.crushOpacity <= 50) {
     gameOverSwitch = true;
+    startSwitch = false;
+    titleSwitch = false;
+    introSwitch = false;
   }
 }
 

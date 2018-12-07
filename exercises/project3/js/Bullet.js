@@ -94,9 +94,6 @@ Bullet.prototype.display = function() {
     }
     if (this.bulletSide === "blue") {
       push();
-      if (supplyCarteType2Blue === true) {
-        this.size = 60;
-      }
       translate(this.x, this.y);
       rotate(this.angle);
       fill(75, 93, 255, this.opacity);
