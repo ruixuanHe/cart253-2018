@@ -7,33 +7,31 @@ This is a template. You must fill in the title,
 author, and this description to match your project!
 
 ******************/
+var angle = 0;
+var x = 500 / 2;
+var y = 500 / 2;
+var j = 0;
+var c;
 
 // setup()
 //
 function setup() {
-  createCanvas(500,500);
-  // Default style settings for text, shape, and color
-  textSize(32);
-  textAlign(CENTER,CENTER);
-  rectMode(CENTER);
-  fill(255,0,0);
-  noStroke();
+  createCanvas(500, 500);
+  angleMode(DEGREES);
+  c = color(111,111,250);
 }
+
 function draw() {
-  background(255);
-  rect(width/2,height/2,100,100);
-  push(); // Save the current settings (the defaults in this case)
-  fill(0); // Make a change for this specific case
-  text("This is nice!",width/2,height/2);
-  pop(); // Restore the settings (the defaults)
-  // fill() goes back to red)
-  if (mouseIsPressed) {
-    push(); // Save the current settings (still the defaults)
-    textSize(200);
-    textAlign(LEFT,CENTER);
-    text("!!!!!!!!!!!!",0,height/2);
-    pop(); // Restore the settings (the defaults)
-    // textSize() goes back to 32
-    // textAlign() goes back to CENTER, CENTER
-  }
+  noStroke();
+  //fill(240, 215, 255,200);
+  fill(60, 237, 253,200);
+  quad(x-35,y,x,y-50,x+35,y,x,y+50);
+  fill(245, 188, 255,150);
+  triangle(x-35,y,x,y-50,x,y);
+  fill(230, 180, 239,150);
+  triangle(x,y-50,x+35,y,x,y);
+  fill(216, 173, 223,150);
+  triangle(x+35,y,x,y+50,x,y);
+  fill(201, 165, 207,150);
+  triangle(x-35,y,x,y+50,x,y);
 }

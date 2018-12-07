@@ -1,5 +1,6 @@
 /*============description==================
-the idea is about a fighter pass through time and shot the enemy
+the idea of my final project is about a fighter pass through time and shot the enemy
+In this prototype:
 1.I want to use simailar background which made by color block in my final project
 2.fighter's operating sysment spend me a lot of time, I will implement it in final project
 3.the collison handle of bullet doesnot work well, but the code is correct.
