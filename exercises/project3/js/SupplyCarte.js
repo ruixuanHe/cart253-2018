@@ -62,6 +62,7 @@ SupplyCarte.prototype.handleCollision = function(shooter) {
   if (dist(shooter.x, shooter.y, this.x, this.y) < (shooter.size + this.size)) {
     this.supplyCartType(shooter);
     this.size = 0;
+    supplyCarteMusic.play();
     this.alive = false;
   }
 }
@@ -73,7 +74,7 @@ SupplyCarte.prototype.display = function() {
   push();
   translate(this.x, this.y)
   fill(255, 0, 0);
-  rect(0, 0, this.size, this.size,4);
+  rect(0, 0, this.size, this.size, 4);
   fill('#ffffff');
   textSize(14);
   text("S", 0, 0);

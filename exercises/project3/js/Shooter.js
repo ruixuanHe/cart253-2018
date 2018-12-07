@@ -88,6 +88,7 @@ Shooter.prototype.update = function() {
     this.collisonSwitch = false;
   }
   if (this.score < 1) {
+    shooterExplode.play();
     this.crushSwitch = true;
   }
   //for supplyCarte
@@ -147,11 +148,13 @@ Shooter.prototype.keyPressed = function() {
     if (this.shooterSide === "red") {
       if (keyCode === 32) {
         bulletRed.push(new Bullet(this.x, this.y, this.angle, "red"));
+        shooterRedMusic.play();
       }
     }
     if (this.shooterSide === "blue") {
       if (keyCode === 13) {
         bulletBlue.push(new Bullet(this.x, this.y, this.angle, "blue"));
+        shooterBlueMusic.play();
       }
     }
   }
@@ -166,7 +169,7 @@ Shooter.prototype.crush = function() {
       push();
       translate(this.crushX, this.crushY);
       rotate(this.crushAngle);
-      fill(random(150,255), 50, random(0, 255), this.crushOpacity);
+      fill(random(150, 255), 50, random(0, 255), this.crushOpacity);
       ellipse(0, this.crushShift, this.crushSize, this.crushSize);
       pop();
       this.crushShift += 0.2;
@@ -185,7 +188,7 @@ Shooter.prototype.crush = function() {
       push();
       translate(this.crushX, this.crushY);
       rotate(this.crushAngle);
-      fill(50, random(0, 255),random(150,255), this.crushOpacity);
+      fill(50, random(0, 255), random(150, 255), this.crushOpacity);
       ellipse(0, this.crushShift, this.crushSize, this.crushSize);
       pop();
       this.crushShift += 0.2;

@@ -41,18 +41,18 @@ TeleportSpot.prototype.display = function() {
 //when shooter overlap the teleportm, it will transmitte shooter to the other one
 TeleportSpot.prototype.transmitte = function(shooter, anotherTeleportSpot) {
   var d = dist(this.x, this.y, shooter.x, shooter.y);
-  if (d < (shooter.size / 2-10)) {
-    if(this.x < shooter.x){
-        shooter.x = anotherTeleportSpot.x - 20;
+  if (d < (shooter.size / 2 - 10)) {
+    if (this.x < shooter.x) {
+      shooter.x = anotherTeleportSpot.x - 20;
     }
-    if(this.x > shooter.x){
-        shooter.x = anotherTeleportSpot.x + 20;
+    if (this.x > shooter.x) {
+      shooter.x = anotherTeleportSpot.x + 20;
     }
-    if(this.y> shooter.y){
-        shooter.y = anotherTeleportSpot.y + 20;
+    if (this.y > shooter.y) {
+      shooter.y = anotherTeleportSpot.y + 20;
     }
-    if(this.y< shooter.y){
-        shooter.y = anotherTeleportSpot.y - 20;
+    if (this.y < shooter.y) {
+      shooter.y = anotherTeleportSpot.y - 20;
     }
     console.log(this.type + " do work");
   }

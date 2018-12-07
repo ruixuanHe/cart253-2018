@@ -4,6 +4,11 @@ Project 3
 Ruixuan He 40000330
 
 ******************/
+var shooterExplode;
+var supplyCarteMusic;
+var shooterRedMusic;
+var shooterBlueMusic;
+var backgroundMusic;
 var backgroundImg;
 var bulletRed = [];
 var bulletBlue = [];
@@ -40,6 +45,11 @@ var text12 = "Supply carte will help you"
 // perload images and sounds
 function preload() {
   backgroundImg = loadImage('assets/images/backgroundImg.jpg');
+  backgroundMusic = new Audio("assets/sounds/bgm.mp3");
+  shooterExplode = new Audio("assets/sounds/ShooterExplode.wav");
+  supplyCarteMusic = new Audio("assets/sounds/SupplyBox.wav");
+  shooterRedMusic = new Audio("assets/sounds/ShooterRed.wav");
+  shooterBlueMusic = new Audio("assets/sounds/ShooterBlue.wav");
 }
 
 // setup()
@@ -137,13 +147,14 @@ function keyPressed() {
 //
 //title of the game
 function title() {
-image(backgroundImg, width / 2, height / 2, width, height);
+  backgroundMusic.play();
+  image(backgroundImg, width / 2, height / 2, width, height);
   fill('#FFFFFF');
   textSize(100);
-  fill(75,150,random(0,255));
+  fill(75, 150, random(0, 255));
   text(text8, width / 2, 1.5 * height / 5);
   textSize(30);
-  fill(255,255,255);
+  fill(255, 255, 255);
   text(text9, width / 2, 2.2 * height / 5);
   text(text10, width / 2, 2.5 * height / 5);
   fill(61, 46, 255);
@@ -160,23 +171,23 @@ image(backgroundImg, width / 2, height / 2, width, height);
 //
 //introduction of game
 function introduction() {
-image(backgroundImg, width / 2, height / 2, width, height);
+  image(backgroundImg, width / 2, height / 2, width, height);
   fill('#FFFFFF');
   textSize(60);
-text(text1, width / 2, 0.2 * height);
-textSize(30);
-fill(255,0,0);
-text(text2, width / 2, 0.3 * height);
-fill(255,255,255);
-text(text3, width / 2, 0.4 * height);
-fill(0,0,255);
-text(text4, width / 2, 0.5 * height);
-fill(255,255,255);
-text(text5, width / 2, 0.6 * height);
-text(text11, width / 2, 0.7 * height);
-text(text12, width / 2, 0.75 * height);
-text(text6, width / 2, 0.9   * height);
-text(text7, width / 2, 0.95 * height);
+  text(text1, width / 2, 0.2 * height);
+  textSize(30);
+  fill(255, 0, 0);
+  text(text2, width / 2, 0.3 * height);
+  fill(255, 255, 255);
+  text(text3, width / 2, 0.4 * height);
+  fill(0, 0, 255);
+  text(text4, width / 2, 0.5 * height);
+  fill(255, 255, 255);
+  text(text5, width / 2, 0.6 * height);
+  text(text11, width / 2, 0.7 * height);
+  text(text12, width / 2, 0.75 * height);
+  text(text6, width / 2, 0.9 * height);
+  text(text7, width / 2, 0.95 * height);
 }
 
 //startGame()
@@ -296,17 +307,17 @@ function reset() {
 //
 //game over page
 function gameOver() {
-image(backgroundImg, width / 2, height / 2, width, height);
-  text("Game Over", width / 2, 0.4*height );
+  image(backgroundImg, width / 2, height / 2, width, height);
+  text("Game Over", width / 2, 0.4 * height);
   if (shooterRed.crushSwitch == false) {
-    fill(random(150,250),0,0);
+    fill(random(150, 250), 0, 0);
     text("Red Side Win!!!!", width / 2, 0.5 * height);
   }
   if (shooterBlue.crushSwitch == false) {
-    fill(0,50,random(0,250));
+    fill(0, 50, random(0, 250));
     text("Blue Side Win!!!!", width / 2, 0.5 * height);
   }
-  fill(255,255,255);
+  fill(255, 255, 255);
   text(text6, width / 2, 0.6 * height);
   text(text7, width / 2, 0.65 * height);
 }
