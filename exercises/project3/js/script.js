@@ -3,6 +3,9 @@
 Project 3
 Ruixuan He 40000330
 
+This project is a compatitive shooting game, I use what I learned in this semester,
+Most of elements is from pervious exercise and project. for example the operating system of shooter,
+the idea of supply box, the explosion of bullet. Enjoy my game :)
 ******************/
 var shooterExplode;
 var supplyCarteMusic;
