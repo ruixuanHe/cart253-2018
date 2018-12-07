@@ -4,6 +4,7 @@ Project 3
 Ruixuan He 40000330
 
 ******************/
+var backgroundImg;
 var bulletRed = [];
 var bulletBlue = [];
 var startSwitch = false;
@@ -32,6 +33,13 @@ var text8 = "SPACE WAR";
 var text9 = "Eliminate enemy";
 var text10 = "Click button to start the game!!!"
 
+// preload()
+//
+// perload images and sounds
+function preload() {
+  backgroundImg = loadImage('assets/images/backgroundImg.jpg');
+}
+
 // setup()
 //
 // setup the canvas
@@ -40,17 +48,18 @@ function setup() {
   noStroke();
   rectMode(CENTER);
   ellipseMode(CENTER);
-  createCanvas(800, 800);
+  createCanvas(1500, 750);
   angleMode(DEGREES);
   textAlign(CENTER, CENTER);
+  imageMode(CENTER,CENTER);
 
   shooterRed = new Shooter(83, 87, 65, 68, "red");
   shooterBlue = new Shooter(40, 38, 37, 39, "blue");
   shooterRed.setup();
   shooterBlue.setup();
 
-  teleportSpot1 = new TeleportSpot(200, 300, "1");
-  teleportSpot2 = new TeleportSpot(600, 600, "2");
+  teleportSpot1 = new TeleportSpot(0.3*width, 0.2*height, "1");
+  teleportSpot2 = new TeleportSpot(0.7*width, 0.8*height, "2");
 }
 
 // draw()
@@ -154,8 +163,7 @@ function introduction() {
 //
 //game page
 function startGame() {
-  console.log(bulletRed.length);
-  background('#000000');
+  image(backgroundImg,width/2,height/2,width,height);
   //supplyCarte:
   //loading time: 15s
   //effect time: 5s
@@ -181,9 +189,9 @@ function startGame() {
   }
   if (supplyCarteType1BlueSwitch) {
     supplyCarteType1BlueSwitchTimer++;
-    if (supplyCarteType1blueSwitchTimer > 300) {
-      supplyCarteType1blueSwitchTimer = 0;
-      supplyCarteType1blueSwitch = false;
+    if (supplyCarteType1BlueSwitchTimer > 300) {
+      supplyCarteType1BlueSwitchTimer = 0;
+      supplyCarteType1BlueSwitch = false;
     }
   }
   if (supplyCarteType2RedSwitch) {
@@ -206,6 +214,8 @@ function startGame() {
   teleportSpot1.transmitte(shooterRed, teleportSpot2);
   teleportSpot1.transmitte(shooterBlue, teleportSpot2);
   teleportSpot2.transmitte(shooterRed, teleportSpot1);
+  console.log(teleportSpot2.x,teleportSpot2.y);
+  console.log(shooterRed.x,shooterRed.y);
   teleportSpot2.transmitte(shooterBlue, teleportSpot1);
   //bullet
   for (var i = bulletRed.length - 1; i >= 0; i--) {

@@ -37,7 +37,7 @@ Explosion.prototype.update = function() {
 // display Explosion on screen
 Explosion.prototype.display = function() {
   push();
-  fill(75, 248, 255, this.opacity);
+  fill(246, 207, 255, this.opacity);
   translate(this.x, this.y);
   rotate(this.angle);
   rect(0, 0, this.size, this.size);

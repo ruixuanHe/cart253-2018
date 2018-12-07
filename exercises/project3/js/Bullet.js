@@ -74,9 +74,9 @@ Bullet.prototype.display = function() {
       push();
       translate(this.x, this.y);
       rotate(this.angle);
-      fill(255, 145, 75, this.opacity);
+      fill(255, 234, 234, this.opacity);
       ellipse(0, 0, this.size + 5, this.size + 5);
-      fill(255, 235, 75, this.opacity);
+      fill(255, 202, 202, this.opacity);
       ellipse(0, 0, this.size, this.size);
       pop();
       this.crushX = this.x;
@@ -96,9 +96,9 @@ Bullet.prototype.display = function() {
       push();
       translate(this.x, this.y);
       rotate(this.angle);
-      fill(75, 93, 255, this.opacity);
+      fill(207, 231, 255, this.opacity);
       ellipse(0, 0, this.size + 5, this.size + 5);
-      fill(275, 183, 255, this.opacity);
+      fill(174, 214, 255, this.opacity);
       ellipse(0, 0, this.size, this.size);
       pop();
       this.crushX = this.x;

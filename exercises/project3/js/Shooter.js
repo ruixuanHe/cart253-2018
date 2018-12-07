@@ -9,7 +9,7 @@ function Shooter(downKey, upKey, leftKey, rightKey, shooterSide) {
   this.vx = 0;
   this.vy = 0;
   this.score = 3;
-  this.size = 30;
+  this.size = 60;
   this.color1;
   this.color2;
   this.color3;
@@ -38,20 +38,20 @@ function Shooter(downKey, upKey, leftKey, rightKey, shooterSide) {
 //setup the color ,position and angle
 Shooter.prototype.setup = function() {
   if (this.shooterSide === "red") {
-    this.color1 = color('#F14234');
-    this.color2 = color('#B53227');
-    this.color3 = color('#78211A');
-    this.color4 = color('#3C110D');
+    this.color1 = color('#FF80B0');
+    this.color2 = color('#FFE5EF');
+    this.color3 = color('#FFB3CF');
+    this.color4 = color('#FF4D90');
     this.x = width / 4;
     this.y = height / 2;
     this.healthBarX = 30;
     this.healthBarY = 20;
   }
   if (this.shooterSide === "blue") {
-    this.color1 = color('#3F4FFF');
-    this.color2 = color('#2F3BBF');
-    this.color3 = color('#202880');
-    this.color4 = color('#101440');
+    this.color1 = color('#6DCCFF');
+    this.color2 = color('#E2F5FF');
+    this.color3 = color('#8BD6FF');
+    this.color4 = color('#16AEFF');
     this.x = 3 * width / 4;
     this.y = height / 2;
     this.angle += 180;
@@ -161,23 +161,45 @@ Shooter.prototype.keyPressed = function() {
 //
 //when bullet hit enemy it will crush
 Shooter.prototype.crush = function() {
-  for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 30) {
-    push();
-    translate(this.crushX, this.crushY);
-    rotate(this.crushAngle);
-    fill(255, 50, random(0, 255), this.crushOpacity);
-    ellipse(0, this.crushShift, this.crushSize, this.crushSize);
-    pop();
-    this.crushShift += 0.03;
-    this.crushOpacity -= 0.12;
-    this.crushSize += 0.01;
+  if (this.shooterSide === "red") {
+    for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 30) {
+      push();
+      translate(this.crushX, this.crushY);
+      rotate(this.crushAngle);
+      fill(random(150,255), 50, random(0, 255), this.crushOpacity);
+      ellipse(0, this.crushShift, this.crushSize, this.crushSize);
+      pop();
+      this.crushShift += 0.2;
+      this.crushOpacity -= 0.10;
+      this.crushSize += 0.2;
+    }
+    if (this.crushOpacity <= 50) {
+      gameOverSwitch = true;
+      startSwitch = false;
+      titleSwitch = false;
+      introSwitch = false;
+    }
   }
-  if (this.crushOpacity <= 50) {
-    gameOverSwitch = true;
-    startSwitch = false;
-    titleSwitch = false;
-    introSwitch = false;
+  if (this.shooterSide === "blue") {
+    for (this.crushAngle = 0; this.crushAngle < 360; this.crushAngle += 30) {
+      push();
+      translate(this.crushX, this.crushY);
+      rotate(this.crushAngle);
+      fill(50, random(0, 255),random(150,255), this.crushOpacity);
+      ellipse(0, this.crushShift, this.crushSize, this.crushSize);
+      pop();
+      this.crushShift += 0.2;
+      this.crushOpacity -= 0.10;
+      this.crushSize += 0.2;
+    }
+    if (this.crushOpacity <= 50) {
+      gameOverSwitch = true;
+      startSwitch = false;
+      titleSwitch = false;
+      introSwitch = false;
+    }
   }
+
 }
 
 //displayHealth()
@@ -187,18 +209,28 @@ Shooter.prototype.displayHealth = function() {
   if (this.shooterSide === "red") {
     for (var i = 0; i < this.score * 55; i += 55) {
       push();
-      fill(116, 221, 87);
+      fill(175, 227, 148);
       translate(this.healthBarX + i, this.healthBarY);
-      rect(0, 0, 50, 30);
+      rect(0, 0, 50, 30, 4);
+      pop();
+      push();
+      fill(202, 237, 183);
+      translate(this.healthBarX + i, this.healthBarY - 3);
+      rect(0, 0, 42, 24, 4);
       pop();
     }
   }
   if (this.shooterSide === "blue") {
     for (var i = 0; i < this.score * 55; i += 55) {
       push();
-      fill(116, 221, 87);
+      fill(175, 227, 148);
       translate(this.healthBarX - i, this.healthBarY);
-      rect(0, 0, 50, 30);
+      rect(0, 0, 50, 30, 4);
+      pop();
+      push();
+      fill(202, 237, 183);
+      translate(this.healthBarX - i, this.healthBarY - 3);
+      rect(0, 0, 42, 24, 4);
       pop();
     }
   }

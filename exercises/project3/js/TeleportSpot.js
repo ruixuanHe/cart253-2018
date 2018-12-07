@@ -42,7 +42,7 @@ TeleportSpot.prototype.display = function() {
 TeleportSpot.prototype.transmitte = function(shooter, anotherTeleportSpot) {
   var d = dist(this.x, this.y, shooter.x, shooter.y);
   if (d < (shooter.size / 2)) {
-    shooter.x = anotherTeleportSpot.x + 20;
-    shooter.y = anotherTeleportSpot.y;
+    shooter.x = anotherTeleportSpot.x + (this.x - shooter.x);
+    shooter.y = anotherTeleportSpot.y + (this.y - shooter.y);
   }
 }
