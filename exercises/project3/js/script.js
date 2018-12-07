@@ -32,6 +32,8 @@ var text7 = "Press K to restart the game!!!";
 var text8 = "SPACE WAR";
 var text9 = "Eliminate enemy";
 var text10 = "Click button to start the game!!!"
+var text11 = "Crystal is teleport spot"
+var text12 = "Supply carte will help you"
 
 // preload()
 //
@@ -51,15 +53,15 @@ function setup() {
   createCanvas(1500, 750);
   angleMode(DEGREES);
   textAlign(CENTER, CENTER);
-  imageMode(CENTER,CENTER);
+  imageMode(CENTER, CENTER);
 
   shooterRed = new Shooter(83, 87, 65, 68, "red");
   shooterBlue = new Shooter(40, 38, 37, 39, "blue");
   shooterRed.setup();
   shooterBlue.setup();
 
-  teleportSpot1 = new TeleportSpot(0.3*width, 0.2*height, "1");
-  teleportSpot2 = new TeleportSpot(0.7*width, 0.8*height, "2");
+  teleportSpot1 = new TeleportSpot(0.3 * width, 0.2 * height, "1");
+  teleportSpot2 = new TeleportSpot(0.7 * width, 0.8 * height, "2");
 }
 
 // draw()
@@ -135,13 +137,16 @@ function keyPressed() {
 //
 //title of the game
 function title() {
-  background(0, 0, 0);
+image(backgroundImg, width / 2, height / 2, width, height);
   fill('#FFFFFF');
+  textSize(100);
+  fill(75,150,random(0,255));
   text(text8, width / 2, 1.5 * height / 5);
-  text(text9, width / 2, 2 * height / 5);
+  textSize(30);
+  fill(255,255,255);
+  text(text9, width / 2, 2.2 * height / 5);
   text(text10, width / 2, 2.5 * height / 5);
   fill(61, 46, 255);
-  textSize(35);
   rect(width / 2, 3.5 * height / 5, 200, 50, 10);
   fill('#FFFFFF');
   text("Start", width / 2, 3.5 * height / 5);
@@ -155,15 +160,30 @@ function title() {
 //
 //introduction of game
 function introduction() {
-  background(0, 0, 0);
-  text("intro", width / 2, height / 2);
+image(backgroundImg, width / 2, height / 2, width, height);
+  fill('#FFFFFF');
+  textSize(60);
+text(text1, width / 2, 0.2 * height);
+textSize(30);
+fill(255,0,0);
+text(text2, width / 2, 0.3 * height);
+fill(255,255,255);
+text(text3, width / 2, 0.4 * height);
+fill(0,0,255);
+text(text4, width / 2, 0.5 * height);
+fill(255,255,255);
+text(text5, width / 2, 0.6 * height);
+text(text11, width / 2, 0.7 * height);
+text(text12, width / 2, 0.75 * height);
+text(text6, width / 2, 0.9   * height);
+text(text7, width / 2, 0.95 * height);
 }
 
 //startGame()
 //
 //game page
 function startGame() {
-  image(backgroundImg,width/2,height/2,width,height);
+  image(backgroundImg, width / 2, height / 2, width, height);
   //supplyCarte:
   //loading time: 15s
   //effect time: 5s
@@ -214,8 +234,6 @@ function startGame() {
   teleportSpot1.transmitte(shooterRed, teleportSpot2);
   teleportSpot1.transmitte(shooterBlue, teleportSpot2);
   teleportSpot2.transmitte(shooterRed, teleportSpot1);
-  console.log(teleportSpot2.x,teleportSpot2.y);
-  console.log(shooterRed.x,shooterRed.y);
   teleportSpot2.transmitte(shooterBlue, teleportSpot1);
   //bullet
   for (var i = bulletRed.length - 1; i >= 0; i--) {
@@ -278,6 +296,17 @@ function reset() {
 //
 //game over page
 function gameOver() {
-  background(0, 0, 0);
-  text("gameOver", width / 2, height / 2);
+image(backgroundImg, width / 2, height / 2, width, height);
+  text("Game Over", width / 2, 0.4*height );
+  if (shooterRed.crushSwitch == false) {
+    fill(random(150,250),0,0);
+    text("Red Side Win!!!!", width / 2, 0.5 * height);
+  }
+  if (shooterBlue.crushSwitch == false) {
+    fill(0,50,random(0,250));
+    text("Blue Side Win!!!!", width / 2, 0.5 * height);
+  }
+  fill(255,255,255);
+  text(text6, width / 2, 0.6 * height);
+  text(text7, width / 2, 0.65 * height);
 }

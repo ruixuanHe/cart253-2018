@@ -73,7 +73,7 @@ SupplyCarte.prototype.display = function() {
   push();
   translate(this.x, this.y)
   fill(255, 0, 0);
-  rect(0, 0, this.size, this.size);
+  rect(0, 0, this.size, this.size,4);
   fill('#ffffff');
   textSize(14);
   text("S", 0, 0);
