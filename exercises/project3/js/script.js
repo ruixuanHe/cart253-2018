@@ -22,6 +22,9 @@ function setup() {
   shooterBlue = new Shooter(40, 38, 37, 39, "blue");
   shooterRed.setup();
   shooterBlue.setup();
+
+  teleportSpot1 = new TeleportSpot(200, 300, "1");
+  teleportSpot2 = new TeleportSpot(600, 600, "2");
 }
 
 // draw()
@@ -29,6 +32,12 @@ function setup() {
 // draw the canvas
 function draw() {
   background('#000000');
+  teleportSpot1.display();
+  teleportSpot2.display();
+  teleportSpot1.transmitte(shooterRed, teleportSpot2);
+  teleportSpot1.transmitte(shooterBlue, teleportSpot2);
+  teleportSpot2.transmitte(shooterRed, teleportSpot1);
+  teleportSpot2.transmitte(shooterBlue, teleportSpot1);
   for (var i = bulletRed.length - 1; i >= 0; i--) {
     bulletRed[i].display();
     bulletRed[i].update();
