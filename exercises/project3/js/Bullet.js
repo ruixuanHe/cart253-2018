@@ -44,6 +44,25 @@ Bullet.prototype.update = function() {
     this.opacity -= 5;
     if (this.opacity <= 0) this.alive = false;
   }
+  //for supplyCarte
+  if (this.bulletSide === "red") {
+    if (supplyCarteType2RedSwitch === true) {
+      this.size *= 2;
+    }
+    if (supplyCarteType2RedSwitch === false) {
+      this.size /= 2;
+    }
+  }
+  if (this.bulletSide === "blue") {
+    if (supplyCarteType2BlueSwitch === true) {
+      this.size *= 2;
+    }
+    if (supplyCarteType2BlueSwitch === false) {
+      this.size /= 2;
+    }
+  }
+  //maximum size 50
+  this.size = constrain(this.size, 25, 50);
 }
 
 // display()
@@ -75,6 +94,9 @@ Bullet.prototype.display = function() {
     }
     if (this.bulletSide === "blue") {
       push();
+      if (supplyCarteType2Blue === true) {
+        this.size = 60;
+      }
       translate(this.x, this.y);
       rotate(this.angle);
       fill(75, 93, 255, this.opacity);

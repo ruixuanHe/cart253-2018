@@ -82,6 +82,7 @@ Shooter.prototype.update = function() {
   }
   this.x = constrain(this.x, 0 + this.size / 2, width - this.size / 2);
   this.y = constrain(this.y, 0 + this.size / 2, height - this.size / 2);
+  //for health bar
   if (this.collisonSwitch === true) {
     this.score -= 1;
     this.collisonSwitch = false;
@@ -89,6 +90,25 @@ Shooter.prototype.update = function() {
   if (this.score < 1) {
     this.crushSwitch = true;
   }
+  //for supplyCarte
+  if (this.shooterSide === "red") {
+    if (supplyCarteType1RedSwitch === true) {
+      this.velocity *= 2;
+    }
+    if (supplyCarteType1RedSwitch === false) {
+      this.velocity /= 2;
+    }
+  }
+  if (this.shooterSide === "blue") {
+    if (supplyCarteType1BlueSwitch === true) {
+      this.velocity *= 2;
+    }
+    if (supplyCarteType1BlueSwitch === false) {
+      this.velocity /= 2;
+    }
+  }
+  //maximum velocity 8
+  this.velocity = constrain(this.velocity, 4, 8);
 }
 
 // display()
