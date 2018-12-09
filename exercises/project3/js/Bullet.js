@@ -155,6 +155,7 @@ Bullet.prototype.crush = function() {
   this.explosion4.display();
   this.explosion5.update();
   this.explosion5.display();
-  if (this.explosion5.alive == false)
+  if (this.explosion5.alive == false) {
     this.alive == false;
+  }
 }

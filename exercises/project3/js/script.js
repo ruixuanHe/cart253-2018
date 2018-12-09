@@ -7,6 +7,7 @@ This project is a compatitive shooting game, I use what I learned in this semest
 Most of elements is from pervious exercise and project. for example the operating system of shooter,
 the idea of supply box, the explosion of bullet. Enjoy my game :)
 ******************/
+var getHit;
 var shooterExplode;
 var supplyCarteMusic;
 var shooterRedMusic;
@@ -39,9 +40,10 @@ var text6 = "Press J to start the game!!!";
 var text7 = "Press K to restart the game!!!";
 var text8 = "SPACE WAR";
 var text9 = "Eliminate enemy";
-var text10 = "Click button to start the game!!!"
-var text11 = "Crystal is teleport spot"
-var text12 = "Supply carte will help you"
+var text10 = "Click button to start the game!!!";
+var text11 = "Crystal is teleport spot";
+var text12 = "Supply carte will help you";
+var text13 = "This game is salute to SPACE WAR 1972"
 
 // preload()
 //
@@ -53,6 +55,7 @@ function preload() {
   supplyCarteMusic = new Audio("assets/sounds/SupplyBox.wav");
   shooterRedMusic = new Audio("assets/sounds/ShooterRed.wav");
   shooterBlueMusic = new Audio("assets/sounds/ShooterBlue.wav");
+  getHit = new Audio("assets/sounds/GetHit.wav");
 }
 
 // setup()
@@ -168,6 +171,7 @@ function title() {
   rect(width / 2, 4 * height / 5, 200, 50, 10);
   fill('#FFFFFF');
   text("Introduction", width / 2, 4 * height / 5);
+  text(text13, width / 2, 0.9 * height);
 }
 
 //introduction()
@@ -293,6 +297,7 @@ function reset() {
   shooterBlue = new Shooter(40, 38, 37, 39, "blue");
   shooterRed.setup();
   shooterBlue.setup();
+  supplyCarte = [];
   supplyCarteTime = 1;
   supplyCarteType1RedSwitch = false;
   supplyCarteType1BlueSwitch = false;

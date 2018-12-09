@@ -85,6 +85,7 @@ Shooter.prototype.update = function() {
   //for health bar
   if (this.collisonSwitch === true) {
     this.score -= 1;
+    getHit.play();
     this.collisonSwitch = false;
   }
   if (this.score < 1) {
